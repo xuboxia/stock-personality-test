@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { toPng } from "html-to-image";
+import { toJpeg } from "html-to-image";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -8,7 +8,7 @@ import {
   RadarChart,
   ResponsiveContainer,
 } from "recharts";
-import { ShareImageCard } from "./components/ShareImageCard";
+import { ShareLongImage } from "./components/ShareLongImage";
 import ShareImagePreviewModal from "./components/ShareImagePreviewModal";
 import { SHARE_IMAGE_FILENAME, SHARE_TARGET_URL } from "./constants/share";
 
@@ -2834,10 +2834,11 @@ export default function StockMarketPersonaTest() {
         throw new Error("share card not ready");
       }
 
-      const dataUrl = await toPng(shareCardRef.current, {
+      const dataUrl = await toJpeg(shareCardRef.current, {
         cacheBust: true,
         pixelRatio: 2.5,
         backgroundColor: "#fbf7f0",
+        quality: 0.95,
       });
 
       setShareImageUrl(dataUrl);
@@ -2883,8 +2884,6 @@ export default function StockMarketPersonaTest() {
       ? rankPeople(result.scores, result.persona, { excludedNames: ENGLISH_EXCLUDED_PEOPLE })
       : result.peopleMatches
     : [];
-  const shareImageSummary =
-    localizedResultPersona?.oneLiner || localizedDimensionInsight?.contrast || "";
   const shareCardDimensions = result
     ? DIMENSIONS.map((dimension) => ({
         key: dimension.key,
@@ -2893,6 +2892,37 @@ export default function StockMarketPersonaTest() {
         value: result.scores[dimension.key],
       }))
     : [];
+  const shareExplainCards = localizedResultPersona
+    ? [
+        { title: ui.whyMatch, content: localizedResultPersona.whyMatch },
+        { title: ui.behavior, content: localizedResultPersona.typicalBehavior },
+        { title: ui.weakness, content: localizedResultPersona.weakness },
+        { title: ui.talent, content: localizedResultPersona.hiddenTalent },
+        { title: ui.bestMarket, content: localizedResultPersona.bestMarket },
+        { title: ui.badMarket, content: localizedResultPersona.badMarket },
+      ]
+    : [];
+  const shareClosePersonas = result
+    ? result.closePersonas.map((persona) => ({
+        name: getPersonaContent(persona, language).name,
+        subtitle: getPersonaContent(persona, language).subtitle,
+        camp: getCampContent(persona.camp, language).label,
+        reason: localizeCloseTypeNames(
+          buildCloseTypeReason(result.scores, persona, language),
+          language,
+        ),
+      }))
+    : [];
+  const sharePeopleCards = localizedPeopleMatches.map((person) => {
+    const localized = getPeopleContent(person, language);
+    return {
+      name: localized.name,
+      shortLabel: localized.shortLabel,
+      likePoint: localized.likePoint,
+      story: localized.story,
+      keywords: localized.keywords,
+    };
+  });
 
   return (
     <div className="min-h-screen" style={shellStyle}>
@@ -3233,16 +3263,27 @@ export default function StockMarketPersonaTest() {
 
       {result ? (
         <div className="pointer-events-none fixed left-[-9999px] top-0 z-[-1] opacity-0" aria-hidden>
-          <ShareImageCard
+          <ShareLongImage
             ref={shareCardRef}
             title="股市人格测试"
             titleEn={language === "en" ? "Stock Market Persona Test" : ""}
-            personaName={localizedResultPersona?.name}
-            summary={shareImageSummary}
+            persona={localizedResultPersona}
+            camp={localizedResultCamp}
             campLabel={ui.campLabel}
-            campName={localizedResultCamp?.label}
-            dimensionTitle={language === "en" ? "Six dimensions" : "六维人格"}
+            summaryLabel={ui.summaryLabel}
+            insight={localizedDimensionInsight}
             dimensions={shareCardDimensions}
+            radarTitle={ui.radarTitle}
+            explainTitle={ui.whySectionTitle}
+            explainCards={shareExplainCards}
+            closeTypesTitle={ui.closeTypesTitle}
+            closeTypesBody={ui.closeTypesBody}
+            closePersonas={shareClosePersonas}
+            peopleTitle={ui.peopleTitle}
+            peopleBody={ui.peopleBody}
+            peopleCards={sharePeopleCards}
+            shareTitle={ui.shareTitle}
+            shareText={localizedShareCopy}
             qrUrl={SHARE_TARGET_URL}
             footerCta={
               language === "en"
