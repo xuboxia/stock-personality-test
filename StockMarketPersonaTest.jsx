@@ -64,8 +64,8 @@ const UI_TEXT = {
   zh: {
     langZh: "中文",
     langEn: "EN",
-    appBadge: "股市人格测试",
-    appTitle: "测测你进 A 股像什么人",
+    appBadge: "测测你进 A 股像什么人",
+    appTitle: "股市人格测试",
     appIntro:
       "有人一进市场就想冲，有人只想等确认，有人永远在复盘里最强。测测你在 A 股里，到底像什么人。",
     statQuestions: "16 道题",
@@ -131,8 +131,8 @@ const UI_TEXT = {
   en: {
     langZh: "中文",
     langEn: "EN",
-    appBadge: "Stock Market Persona Test",
-    appTitle: "What Kind of Person Are You in the Stock Market?",
+    appBadge: "What Kind of Person Are You in the Stock Market?",
+    appTitle: "Stock Market Persona Test",
     appIntro:
       "Some people want to charge in the second the market heats up. Some only move after confirmation. Some are unbeatable only in post-market review. Find out what kind of market character you are.",
     statQuestions: "16 questions",
