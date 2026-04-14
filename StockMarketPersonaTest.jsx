@@ -17,46 +17,54 @@ const COUNT_STORAGE_KEY = "stock-persona-test-completion-count-v1";
 const LANGUAGE_STORAGE_KEY = "stock-persona-test-language-v1";
 
 const DIMENSIONS = [
-  { key: "rush", label: "上头速度", labelEn: "Impulse Speed", short: "上头", shortEn: "Impulse" },
-  { key: "fomo", label: "踏空敏感", labelEn: "FOMO Sensitivity", short: "踏空", shortEn: "FOMO" },
-  { key: "risk", label: "风险偏好", labelEn: "Risk Appetite", short: "风险", shortEn: "Risk" },
-  { key: "discipline", label: "纪律程度", labelEn: "Discipline", short: "纪律", shortEn: "Rules" },
-  { key: "patience", label: "耐心程度", labelEn: "Patience", short: "耐心", shortEn: "Patience" },
-  { key: "contrarian", label: "逆向本能", labelEn: "Contrarian Instinct", short: "逆向", shortEn: "Contrarian" },
+  { key: "rush", label: "决策速度", labelEn: "Decision Speed", short: "速度", shortEn: "Speed" },
+  { key: "fomo", label: "机会敏感", labelEn: "Opportunity Drive", short: "机会", shortEn: "Opportunity" },
+  { key: "risk", label: "风险承受", labelEn: "Risk Tolerance", short: "风险", shortEn: "Risk" },
+  { key: "discipline", label: "纪律执行", labelEn: "Discipline", short: "纪律", shortEn: "Discipline" },
+  { key: "patience", label: "持有周期", labelEn: "Holding Horizon", short: "周期", shortEn: "Horizon" },
+  { key: "contrarian", label: "风格弹性", labelEn: "Style Flexibility", short: "弹性", shortEn: "Flexibility" },
 ];
 
 const CAMP_META = {
-  冲锋派: {
-    label: "冲锋派",
-    labelEn: "Charge Camp",
-    description: "你对热度、强度和节奏的感应更快，看到机会时更愿意先冲一步。",
+  系统派: {
+    label: "系统派",
+    labelEn: "System Camp",
+    description: "你更相信规则、框架和可复用的方法，交易更像在执行系统，而不是追逐情绪。",
     descriptionEn:
-      "You react faster to heat, momentum and rhythm. Once the opportunity feels real, you would rather move first.",
-    accent: "from-[#c6865e] to-[#9b5e43]",
-  },
-  防守派: {
-    label: "防守派",
-    labelEn: "Defense Camp",
-    description: "你更在意节奏、验证和撤退路线，市场先证明自己，你才愿意给它机会。",
-    descriptionEn:
-      "You care more about timing, confirmation and exits. The market has to prove itself before you commit.",
+      "You trust rules, structure and repeatable methods. Trading feels more like running a system than chasing emotion.",
     accent: "from-[#7d8d77] to-[#596453]",
   },
-  观察派: {
-    label: "观察派",
-    labelEn: "Observer Camp",
-    description: "你会先读情绪、看关系、看结构，市场在你眼里更像一个会说话的系统。",
+  价值派: {
+    label: "价值派",
+    labelEn: "Value Camp",
+    description: "你更重视研究、耐心和本金安全，宁可显得慢一点，也不愿被市场节奏随便拽走。",
     descriptionEn:
-      "You read sentiment, relationships and structure first. To you, the market behaves like a system that speaks.",
+      "You care more about research, patience and capital protection. You would rather look slow than get dragged around by market speed.",
     accent: "from-[#8a7d70] to-[#64584f]",
   },
-  纠结派: {
-    label: "纠结派",
-    labelEn: "Inner Conflict Camp",
-    description: "你不是没想法，而是想法太多。真到按键那一刻，常常是你和自己先打起来。",
+  进攻派: {
+    label: "进攻派",
+    labelEn: "Action Camp",
+    description: "你对波动、机会和出手时机更敏感，愿意为速度和赔率承担更高风险。",
     descriptionEn:
-      "It is not that you have no view. You have too many. By the time you need to click, you are often debating yourself first.",
+      "You are more sensitive to volatility, opportunity and timing, and more willing to take risk in exchange for speed and upside.",
+    accent: "from-[#c6865e] to-[#9b5e43]",
+  },
+  事件派: {
+    label: "事件派",
+    labelEn: "Catalyst Camp",
+    description: "你会围绕新闻、催化剂和市场新叙事寻找机会，变化本身就是你的信号源。",
+    descriptionEn:
+      "You hunt around news, catalysts and fresh narratives. Change itself is one of your main signal sources.",
     accent: "from-[#b49364] to-[#8f6b3f]",
+  },
+  情绪派: {
+    label: "情绪派",
+    labelEn: "Emotion Camp",
+    description: "你和市场情绪的耦合度更高，热度、波动和群体反应很容易直接影响你的判断。",
+    descriptionEn:
+      "You are more tightly coupled to market emotion. Heat, volatility and crowd reaction can influence your decisions directly.",
+    accent: "from-[#b56f5f] to-[#8a4f43]",
   },
 };
 
@@ -64,21 +72,21 @@ const UI_TEXT = {
   zh: {
     langZh: "中文",
     langEn: "EN",
-    appBadge: "测测你进 A 股像什么人",
-    appTitle: "股市人格测试",
+    appBadge: "Trading Personality Quiz",
+    appTitle: "交易人格测试",
     appIntro:
-      "有人一进市场就想冲，有人只想等确认，有人永远在复盘里最强。测测你在 A 股里，到底像什么人。",
+      "这套测试会根据你的习惯、直觉和决策方式，试着还原你真实的交易人格。这里没有标准答案，只有更诚实的答案。",
     statQuestions: "16 道题",
-    statPersonas: "16 种人格",
-    statCamps: "4 个阵营",
+    statPersonas: "10 种结果",
+    statCamps: "5 个阵营",
     statShare: "支持分享截图",
     completionCount: (count) => `本机已完成测试 ${count} 次`,
     restoredIntro:
-      "已恢复你上次的测试结果。你也可以直接重新测一遍，看今天的市场人格有没有变。",
+      "已恢复你上次的测试结果。你也可以直接重新测一遍，看今天的交易人格有没有变化。",
     startTest: "开始测试",
     notAdviceTitle: "这不是投资建议工具",
     notAdviceBody:
-      "它不是专业交易测评，也不负责告诉你该买什么。它只把你在市场里的情绪反应、风险偏好、节奏习惯和行为倾向，映射成一个更适合截图和传播的“市场人格”。",
+      "它不是专业交易测评，也不负责告诉你该买什么。它只会把你在真实交易里的情绪反应、风险偏好、节奏习惯和行为倾向，映射成一个更适合分享和截图传播的“交易人格”。",
     disclaimer: "本测试仅供娱乐，不构成任何投资建议。",
     questionProgress: (current, total) => `第 ${current} 题 / 共 ${total} 题`,
     questionHint: "市场里的下意识反应",
@@ -120,7 +128,7 @@ const UI_TEXT = {
     copyShare: "复制结果文案",
     copied: "已复制文案",
     restart: "重新测试",
-    radarTitle: "六维股市人格图",
+    radarTitle: "六维交易人格图",
     radarBody: "你在关键市场倾向上的分布",
     toneVeryHigh: "很高",
     toneHigh: "偏高",
@@ -131,21 +139,21 @@ const UI_TEXT = {
   en: {
     langZh: "中文",
     langEn: "EN",
-    appBadge: "What Kind of Person Are You in the Stock Market?",
-    appTitle: "Stock Market Persona Test",
+    appBadge: "Trading Personality Quiz",
+    appTitle: "Trading Personality Quiz",
     appIntro:
-      "Some people want to charge in the second the market heats up. Some only move after confirmation. Some are unbeatable only in post-market review. Find out what kind of market character you are.",
+      "This quiz is designed to uncover your real trading personality through your habits, instincts, and decision-making style. There are no perfect answers here, just honest ones.",
     statQuestions: "16 questions",
-    statPersonas: "16 personas",
-    statCamps: "4 camps",
+    statPersonas: "10 result types",
+    statCamps: "5 camps",
     statShare: "Made for screenshots",
     completionCount: (count) => `Completed on this device ${count} times`,
     restoredIntro:
-      "Your last result has been restored. You can also retake the test and see whether today's market persona feels different.",
+      "Your last result has been restored. You can also retake the quiz and see whether today's trading personality feels different.",
     startTest: "Start Test",
     notAdviceTitle: "Not an Investment Tool",
     notAdviceBody:
-      "This is not a professional trading assessment and it does not tell you what to buy. It simply maps your emotional reactions, risk preference, timing habits and behavior patterns into a more shareable market persona.",
+      "This is not a professional trading assessment and it does not tell you what to buy. It simply maps your emotional reactions, risk preference, timing habits and behavior patterns into a more shareable trading personality.",
     disclaimer: "This test is for entertainment only and does not constitute investment advice.",
     questionProgress: (current, total) => `Question ${current} / ${total}`,
     questionHint: "Your market instinct",
@@ -199,484 +207,304 @@ const UI_TEXT = {
 
 const PERSONAS = [
   {
-    name: "天生韭菜",
-    subtitle: "情绪一热，手就先替你表达态度",
-    camp: "纠结派",
-    oneLiner: "你不是不懂风险，你是每次都觉得这次可能真不一样。",
+    name: "基金经理",
+    subtitle: "冷静、成体系，而且有点过分理性",
+    camp: "系统派",
+    oneLiner: "你更在意过程、风控和一致性，而不是一次交易到底够不够刺激。",
     description:
-      "你对市场温度的感知很强，强到容易被它带着走。别人还在确认，你已经开始脑补下一段了。",
+      "你做交易时天然会先想风险预算、组合结构和回撤容忍，而不是只盯着某一个机会够不够热。",
     whyMatch:
-      "你更容易被热度和机会感推动，尤其在别人都在冲的时候，很难完全把自己按住。",
+      "你的纪律和持有周期都偏高，决策速度不算快，更像一个先做尽调、再决定配置的人。",
     typicalBehavior:
-      "看到龙头加速会想跟，回撤时又想解释成洗盘；复盘总觉得问题出在执行，盘中又常常重演。",
+      "先看框架、再看赔率；仓位控制和风控边界往往比单次买卖点更重要。",
     weakness:
-      "最致命的不是看错，而是太容易在最热的时候把情绪当逻辑。",
+      "在爆发式行情里容易显得慢半拍，等一切都看清楚时，最肥的一段可能已经走完了。",
     hiddenTalent:
-      "你对市场活跃点的嗅觉其实不差，只要把情绪反应晚半拍，识别力会明显提升。",
-    bestMarket: "主线明确、赚钱效应持续发酵的强趋势行情。",
-    badMarket: "轮动混乱、假突破多、强弱切得很快的震荡市。",
+      "你擅长把交易做成可长期复用的流程，这种稳定感本身就是稀缺能力。",
+    bestMarket: "结构清晰、节奏稳定、基本面和价格行为能互相验证的环境。",
+    badMarket: "纯情绪驱动、日内剧烈切换、靠抢反应吃肉的躁动市场。",
     shareText:
-      "测出来是天生韭菜。市场一热，我的判断会先变成参与冲动。不是没看过风险，是总觉得这次也许轮到我了。",
+      "测出来是基金经理。市场可以很热，但我还是会先算回撤，再决定要不要参与。",
     scores: {
-      rush: 8,
-      fomo: 9,
-      risk: 7,
-      discipline: 2,
-      patience: 2,
-      contrarian: 3,
-    },
-    closeTypes: ["追涨冠军", "止盈困难户"],
-    peopleMatches: ["保罗·都铎·琼斯", "比尔·阿克曼", "索罗斯"],
-  },
-  {
-    name: "未来游资",
-    subtitle: "还没成名，但出手时已经很像要去抢镜头的人",
-    camp: "冲锋派",
-    oneLiner: "你不是单纯冲动，你是对热度变化反应太快，而且真的愿意承担后果。",
-    description:
-      "你喜欢速度、确定性和位置共振的那一下。市场一旦把方向亮出来，你很难只做旁观者。",
-    whyMatch:
-      "你的上头速度和风险偏好都不低，但和纯情绪流不同的是，你多少还带着一点自己的执行框架。",
-    typicalBehavior:
-      "盯核心、等分歧、抢回流；要么不做，要做就尽量做最强的那一口。",
-    weakness:
-      "容易把速度当优势，也容易因为太相信自己的节奏，把回撤容忍度开得过大。",
-    hiddenTalent:
-      "你对市场选股逻辑的体感很强，只要继续补纪律，冲劲会慢慢变成风格。",
-    bestMarket: "情绪共振、龙头明确、板块持续强化的进攻市。",
-    badMarket: "一日游题材、核按钮频繁、强度持续断层的退潮市。",
-    shareText:
-      "测出来是未来游资。市场一热，手比脑子先准备好了。还没赚到大钱，但气质已经先到了。",
-    scores: {
-      rush: 9,
-      fomo: 8,
-      risk: 9,
-      discipline: 6,
-      patience: 3,
+      rush: 2,
+      fomo: 3,
+      risk: 3,
+      discipline: 9,
+      patience: 8,
       contrarian: 4,
     },
-    closeTypes: ["消息冲浪王", "追涨冠军"],
+    closeTypes: ["保守配置者", "趋势跟随者"],
+    peopleMatches: ["张磊", "雷·达里奥", "李嘉诚"],
+  },
+  {
+    name: "价值投资者",
+    subtitle: "愿意等、愿意研究，也愿意忍受无聊",
+    camp: "价值派",
+    oneLiner: "你相信耐心会得到回报，价格噪音不值得你每次都跟着起舞。",
+    description:
+      "你更愿意把时间花在研究价值、理解定价和等待更合适的位置上，而不是追逐每一次短期情绪波动。",
+    whyMatch:
+      "你的持有周期明显更长，纪律和耐心也偏高，说明你更像一个愿意为逻辑等待的人。",
+    typicalBehavior:
+      "看研究、看估值、看长期逻辑；不急着天天出手，更在意自己买到的是不是合理价格。",
+    weakness:
+      "有时会过于坚持自己的研究判断，低估市场在短中期持续偏离的能力。",
+    hiddenTalent:
+      "你能在喧闹市场里保留独立判断，这种不被噪音牵着走的能力非常值钱。",
+    bestMarket: "逻辑能慢慢兑现、市场愿意给时间验证基本面的环境。",
+    badMarket: "全靠情绪推动、消息一来就改叙事的高波动阶段。",
+    shareText:
+      "测出来是价值投资者。我不是懒得动，我只是更相信研究和耐心，而不是市场一天一个态度。",
+    scores: {
+      rush: 1,
+      fomo: 2,
+      risk: 4,
+      discipline: 8,
+      patience: 10,
+      contrarian: 5,
+    },
+    closeTypes: ["保守配置者", "基金经理"],
+    peopleMatches: ["巴菲特", "芒格", "李录"],
+  },
+  {
+    name: "趋势跟随者",
+    subtitle: "你不预测一切，你只想在趋势启动后搭上车",
+    camp: "系统派",
+    oneLiner: "你不需要永远买在最低点，你更在意一旦趋势成立，自己能不能跟得上。",
+    description:
+      "你更相信价格行为和趋势延续，而不是提前猜拐点。只要市场已经走出来，你愿意顺着它做。",
+    whyMatch:
+      "你的机会敏感和纪律都不低，说明你既愿意跟随趋势，也会尽量用规则约束自己的节奏。",
+    typicalBehavior:
+      "看突破、看跟随、看趋势是否延续；一旦确认方向，你更愿意顺势而为。",
+    weakness:
+      "横盘和假突破会让你很难受，来回试错时，你会明显感觉效率下降。",
+    hiddenTalent:
+      "你能把交易从“讲故事”拉回到“跟随事实”，这让你在好趋势里往往更稳定。",
+    bestMarket: "趋势清晰、方向一致、价格会自己证明自己的阶段。",
+    badMarket: "震荡反复、假信号密集、趋势总在半路失效的环境。",
+    shareText:
+      "测出来是趋势跟随者。我不一定想猜未来，但只要趋势确认了，我就想跟上那一段。",
+    scores: {
+      rush: 6,
+      fomo: 7,
+      risk: 6,
+      discipline: 8,
+      patience: 5,
+      contrarian: 2,
+    },
+    closeTypes: ["事件驱动交易者", "激进投机者"],
     peopleMatches: ["保罗·都铎·琼斯", "索罗斯", "大卫·泰珀"],
   },
   {
-    name: "基金经理",
-    subtitle: "你更像在管净值，而不是在追段子",
-    camp: "防守派",
-    oneLiner: "你不是胆子小，你只是更在意确认和回撤管理。",
+    name: "量化交易员",
+    subtitle: "相信数据、规则和可重复性，胜过相信灵感",
+    camp: "系统派",
+    oneLiner: "与其争论叙事，你更愿意先验证策略能不能重复成立。",
     description:
-      "你天然会先想组合、节奏和确定性，不太容易为了某个短时热点就改掉自己的节奏。",
+      "你偏爱逻辑、数据和结构化方法。你对“感觉不错”这种理由天然不太放心，更想知道样本和纪律站不站得住。",
     whyMatch:
-      "你的纪律和耐心比较稳定，对踏空不算特别敏感，更愿意在理解清楚以后出手。",
+      "你的纪律维度很高，决策节奏不算莽，说明你更像先定义规则、再让执行服务规则的人。",
     typicalBehavior:
-      "研究一阵子再下手，仓位分配比买卖点更重要；不爱用情绪解释一切。",
+      "重视回测、记录、复盘和一致性；比起临场拍脑袋，你更相信流程和边界。",
     weakness:
-      "容易在极强情绪市场里显得慢半拍，等到全都看清楚了，赔率也被磨掉一截。",
+      "一旦市场进入极端情绪化状态，纯靠系统可能会显得慢，甚至有点钝。",
     hiddenTalent:
-      "你对风险收益比的平衡感不错，适合在噪音里守住节奏，不被市场牵着跑。",
-    bestMarket: "慢牛、结构性行情、基本面和趋势能互相验证的环境。",
-    badMarket: "纯情绪博弈、涨跌全看预期差和节奏抢跑的狂热阶段。",
+      "你最大的优势不是一次神来之笔，而是能把好决策变成可复用的长期资产。",
+    bestMarket: "样本有效、噪音可控、策略可以重复发挥的市场环境。",
+    badMarket: "风格突变、情绪极端、市场不给模型留缓冲的阶段。",
     shareText:
-      "测出来是基金经理。不是不想冲，是我天生更像先算回撤的人。市场可以热，我得先确定自己不失控。",
-    scores: {
-      rush: 2,
-      fomo: 2,
-      risk: 3,
-      discipline: 8,
-      patience: 8,
-      contrarian: 5,
-    },
-    closeTypes: ["老股民", "纪律机器人"],
-    peopleMatches: ["张磊", "李录", "雷·达里奥"],
-  },
-  {
-    name: "老股民",
-    subtitle: "你不是没见过大场面，你是见太多了",
-    camp: "防守派",
-    oneLiner: "你对市场的第一反应，往往不是激动，而是警惕。",
-    description:
-      "你看过的轮回够多，对热闹天然留有余地。别人看到机会，你先看到节奏会不会反噬。",
-    whyMatch:
-      "你的耐心、纪律和逆向本能都不低，典型特点不是猛，而是懂得什么时候少犯错。",
-    typicalBehavior:
-      "不轻易被新故事打动，会看量、看位置、看拥挤度；有时甚至宁愿错过也不愿乱上。",
-    weakness:
-      "容易因为太懂风险而显得保守，市场真走出来时，你的犹豫会让收益滞后。",
-    hiddenTalent:
-      "你对危险信号的识别很强，特别适合在别人上头的时候帮自己踩刹车。",
-    bestMarket: "震荡结构市、分化市、从热到冷切换频繁的环境。",
-    badMarket: "单边逼空、持续加速、强得不讲道理的情绪主升。",
-    shareText:
-      "测出来是老股民。别人看见的是机会，我先想的是这玩意儿会不会明天就翻脸。不是怂，是见得多了。",
+      "测出来是量化交易员。相信感觉之前，我更想先看数据。能复现，才算数。",
     scores: {
       rush: 3,
-      fomo: 3,
-      risk: 4,
-      discipline: 7,
-      patience: 7,
-      contrarian: 6,
-    },
-    closeTypes: ["基金经理", "空仓哲学家"],
-    peopleMatches: ["冯柳", "李嘉诚", "雷·达里奥"],
-  },
-  {
-    name: "追涨冠军",
-    subtitle: "只相信已经被市场选出来的东西",
-    camp: "冲锋派",
-    oneLiner: "你不是喜欢追高，你是只相信已经赢过一轮的强者。",
-    description:
-      "你对强度和确认极度敏感。没有走出来的东西你懒得猜，已经走出来的东西你又很难不心动。",
-    whyMatch:
-      "你的踏空敏感度很高，宁愿买贵一点，也不愿错过一只真正被市场点名的票。",
-    typicalBehavior:
-      "喜欢跟最强，不爱提前埋伏；板块一旦加速，你会比平时更有行动力。",
-    weakness:
-      "最容易受伤的地方就是高潮接力，买点常常没问题，难的是情绪拐头时不恋战。",
-    hiddenTalent:
-      "你对强弱和趋势的体感很准，能快速识别谁是被市场选出来的对象。",
-    bestMarket: "主线抱团、板块龙头不断超预期的强情绪期。",
-    badMarket: "高标断板、情绪日内翻脸、强弱切换没有缓冲的阶段。",
-    shareText:
-      "测出来是追涨冠军。别人说高，我说这是市场盖章过的强。问题不在买得贵，问题在拐点来时我还想再信一次。",
-    scores: {
-      rush: 9,
-      fomo: 10,
-      risk: 8,
-      discipline: 4,
-      patience: 2,
-      contrarian: 2,
-    },
-    closeTypes: ["未来游资", "消息冲浪王"],
-    peopleMatches: ["保罗·都铎·琼斯", "大卫·泰珀", "索罗斯"],
-  },
-  {
-    name: "抄底艺术家",
-    subtitle: "你对下跌的第一反应，是看看有没有人错杀了价值",
-    camp: "观察派",
-    oneLiner: "你不是单纯爱逆着来，你是总觉得最舒服的位置不该出现在最热的时候。",
-    description:
-      "你对拥挤和高潮天生警惕，更喜欢在别人不太想看时找性价比，追求舒服的位置和反身机会。",
-    whyMatch:
-      "你的逆向本能明显更强，愿意承受短期不被理解，去换一个你觉得更划算的起点。",
-    typicalBehavior:
-      "喜欢等分歧、等恐慌、等错杀；不太爱追已经跑出来的东西。",
-    weakness:
-      "最容易错在接太早，市场还没止跌，你已经先把勇气交出去了。",
-    hiddenTalent:
-      "你有捕捉预期差和情绪反转的天赋，一旦耐心够，常能拿到更优的赔率。",
-    bestMarket: "杀跌过头后的修复段、分歧转一致、恐慌后回暖的行情。",
-    badMarket: "持续阴跌、逻辑塌陷、越跌越便宜但一直更便宜的环境。",
-    shareText:
-      "测出来是抄底艺术家。我不太喜欢最热的地方，我更喜欢大家都不舒服时，看看有没有被错杀的机会。",
-    scores: {
-      rush: 4,
-      fomo: 2,
-      risk: 6,
-      discipline: 5,
-      patience: 6,
-      contrarian: 10,
-    },
-    closeTypes: ["补仓艺术家", "情绪观察员"],
-    peopleMatches: ["索罗斯", "冯柳", "约翰·保尔森"],
-  },
-  {
-    name: "模拟盘股神",
-    subtitle: "脑内收益曲线总比实盘更完整",
-    camp: "观察派",
-    oneLiner: "你不是没逻辑，你是实盘一按键，逻辑就开始和情绪打架。",
-    description:
-      "你很会推演、很会拆结构，复盘时经常思路清晰，可一旦带上真仓位，动作会比想法保守得多。",
-    whyMatch:
-      "你的纪律不算低，风险偏好也不算高，说明你并不盲冲，但会在实战里放大每个决定的心理重量。",
-    typicalBehavior:
-      "盘后复盘头头是道，盘中却容易想太多；看得见机会，按键时又怕节奏不对。",
-    weakness:
-      "最容易被自己卡住，想要完美确认，最后把最好的出手窗口让给了别人。",
-    hiddenTalent:
-      "你对结构、逻辑和节奏的复盘能力很强，适合把经验沉淀成可复用的框架。",
-    bestMarket: "结构清晰、节奏有层次、复盘能持续提升胜率的环境。",
-    badMarket: "节奏极快、靠下意识抢反应、不给你思考时间的行情。",
-    shareText:
-      "测出来是模拟盘股神。盘后我是市场顾问，盘中我是风险委员会。想得很完整，真到下单时就开始尊重波动了。",
-    scores: {
-      rush: 3,
-      fomo: 5,
-      risk: 4,
-      discipline: 6,
-      patience: 5,
-      contrarian: 4,
-    },
-    closeTypes: ["键盘分析师", "基金经理"],
-    peopleMatches: ["芒格", "爱德华·索普", "雷·达里奥"],
-  },
-  {
-    name: "纪律机器人",
-    subtitle: "情绪很吵，但你的流程更大声",
-    camp: "防守派",
-    oneLiner: "你不是冷血，你只是比大多数人更愿意服从规则。",
-    description:
-      "你不太依赖盘中灵感，更相信条件、计划和动作的一致性。市场热不热，会影响你，但不应该替你做决定。",
-    whyMatch:
-      "你的纪律程度非常高，同时上头和踏空都不算特别夸张，这是一种典型的流程派人格。",
-    typicalBehavior:
-      "设条件、看触发、按规则做；该止损时不拖泥带水，该空仓时也能接受无聊。",
-    weakness:
-      "容易在极度情绪化的行情里错过最暴力的一段，因为你不爱做没有历史样本支撑的事。",
-    hiddenTalent:
-      "你最大的优势不是某一次神来之笔，而是长期把错误率压下去的能力。",
-    bestMarket: "有规律可循、节奏反复出现、系统能稳定执行的环境。",
-    badMarket: "风格突变、题材一日三换、靠即兴反应抢速度的混沌市。",
-    shareText:
-      "测出来是纪律机器人。市场可以疯，但流程不能乱。别人追的是刺激，我追的是一致性。",
-    scores: {
-      rush: 2,
       fomo: 2,
       risk: 4,
       discipline: 10,
-      patience: 7,
-      contrarian: 5,
-    },
-    closeTypes: ["基金经理", "空仓哲学家"],
-    peopleMatches: ["詹姆斯·西蒙斯", "爱德华·索普", "格雷厄姆"],
-  },
-  {
-    name: "情绪观察员",
-    subtitle: "你在看盘，也在看所有人怎么一起看盘",
-    camp: "观察派",
-    oneLiner: "你不是慢，你是在先判断市场现在有没有在说真话。",
-    description:
-      "你对市场情绪的细微变化很敏感，不一定第一时间下场，但总会先观察风往哪边吹、吹得真不真。",
-    whyMatch:
-      "你的纪律和逆向本能都偏高，说明你会把情绪当线索，而不是当命令。",
-    typicalBehavior:
-      "先读盘面情绪，再决定自己站哪一边；很擅长发现热度变化背后的群体心理。",
-    weakness:
-      "观察太久会失去最好的一击，容易变成看得明白、出手偏慢。",
-    hiddenTalent:
-      "你对市场语言的理解能力很强，能在别人只看涨跌时，看见资金在表达什么。",
-    bestMarket: "节奏有层次、情绪可读、强弱和预期博弈明显的行情。",
-    badMarket: "无主线、无信号、全靠随机消息打断结构的无序阶段。",
-    shareText:
-      "测出来是情绪观察员。我不急着成为市场的一部分，我更像先看看市场今天在演哪一出。",
-    scores: {
-      rush: 2,
-      fomo: 3,
-      risk: 3,
-      discipline: 7,
       patience: 6,
-      contrarian: 7,
-    },
-    closeTypes: ["抄底艺术家", "键盘分析师"],
-    peopleMatches: ["雷·达里奥", "吉姆·查诺斯", "爱德华·索普"],
-  },
-  {
-    name: "纸上巴菲特",
-    subtitle: "能看三年，常常看不过三天波动",
-    camp: "纠结派",
-    oneLiner: "你不是不会格局，你是常常在现实波动面前被理想自己打脸。",
-    description:
-      "你相信长期、相信逻辑、也能说出耐心的重要，但真拿在手里时，市场的每次波动都像在考你。",
-    whyMatch:
-      "你的耐心愿望很高，踏空不敏感，说明你认同长期框架；但纪律和行动的一致性不总是跟得上。",
-    typicalBehavior:
-      "研究时像长期投资者，盘中又容易盯短线波动；嘴上说拿住，心里每天都在问还对不对。",
-    weakness:
-      "容易把长期当成情绪缓冲区，逻辑和借口之间的边界有时会被自己模糊掉。",
-    hiddenTalent:
-      "你对公司、逻辑和长周期故事的理解欲望很强，只要能减少自我拉扯，定力会成为优势。",
-    bestMarket: "中长期逻辑顺畅、波动可承受、能给耐心回报的趋势行情。",
-    badMarket: "大开大合、消息驱动、短线情绪凌驾一切的高波动市场。",
-    shareText:
-      "测出来是纸上巴菲特。理念上我已经长期主义了，实盘里还在练怎么别被三天波动打回短线人格。",
-    scores: {
-      rush: 1,
-      fomo: 1,
-      risk: 3,
-      discipline: 6,
-      patience: 10,
-      contrarian: 6,
-    },
-    closeTypes: ["空仓哲学家", "基金经理"],
-    peopleMatches: ["巴菲特", "李录", "芒格"],
-  },
-  {
-    name: "消息冲浪王",
-    subtitle: "风一吹你就知道哪边先热",
-    camp: "冲锋派",
-    oneLiner: "你不是只看消息，你是特别擅长在消息里闻到节奏变化。",
-    description:
-      "你对事件、预期差和风口极其敏感，市场一有异动，你会很快去判断它是不是下一波共识。",
-    whyMatch:
-      "你的上头速度和踏空敏感度都比较高，说明你很怕自己慢一步，错过市场刚点火的窗口。",
-    typicalBehavior:
-      "盯消息、盯异动、盯板块联动；动作往往快于大多数人，尤其在突发题材上。",
-    weakness:
-      "最容易在消息密集时过度交易，把短暂噪音误认成持续主线。",
-    hiddenTalent:
-      "你对新叙事的接收速度快，适合第一时间识别市场的集体注意力在哪里。",
-    bestMarket: "事件催化密集、主题轮动快、预期差能迅速兑现的市场。",
-    badMarket: "消息很多但持续性差、隔日即兑现、情绪无法接力的环境。",
-    shareText:
-      "测出来是消息冲浪王。风还没完全起来，我已经先去找板块了。问题不是不敏锐，是有时候太敏锐。",
-    scores: {
-      rush: 8,
-      fomo: 8,
-      risk: 7,
-      discipline: 3,
-      patience: 2,
-      contrarian: 3,
-    },
-    closeTypes: ["未来游资", "追涨冠军"],
-    peopleMatches: ["大卫·泰珀", "保罗·都铎·琼斯", "索罗斯"],
-  },
-  {
-    name: "格局大师",
-    subtitle: "真看好了，就想给它多一点时间",
-    camp: "冲锋派",
-    oneLiner: "你不是拿得久，你是总想拿到最像样的那一段。",
-    description:
-      "你不是最容易激动的那类人，但一旦认可逻辑，就愿意给趋势更多空间，不轻易被日内波动吓掉。",
-    whyMatch:
-      "你的风险偏好不低，同时耐心也比典型冲锋派高，说明你不是只想抢第一口，还想吃更完整的一段。",
-    typicalBehavior:
-      "对看中的方向会更愿意给时间，喜欢拿逻辑、情绪和趋势一起验证，而不是一有浮盈就跑。",
-    weakness:
-      "格局感一旦过头，容易把该兑现的利润又交回去，把信念和执念混在一起。",
-    hiddenTalent:
-      "你对趋势延续性的判断不错，一旦方向做对，往往比别人更能拿住主升段。",
-    bestMarket: "趋势清晰、主线延续、强者恒强的中段加速行情。",
-    badMarket: "来回抽脸、反复轮动、主线一天一换的结构破碎市。",
-    shareText:
-      "测出来是格局大师。我不是非要多拿一天，我只是总觉得真正的主升，不该只赚到开头那点情绪。",
-    scores: {
-      rush: 6,
-      fomo: 4,
-      risk: 7,
-      discipline: 5,
-      patience: 8,
       contrarian: 4,
     },
-    closeTypes: ["未来游资", "止盈困难户"],
-    peopleMatches: ["比尔·阿克曼", "巴菲特", "卡尔·伊坎"],
+    closeTypes: ["基金经理", "趋势跟随者"],
+    peopleMatches: ["詹姆斯·西蒙斯", "爱德华·索普", "雷·达里奥"],
   },
   {
-    name: "键盘分析师",
-    subtitle: "图、逻辑、结构都能拆，真正难的是出手那一下",
-    camp: "观察派",
-    oneLiner: "你不是看不懂，只是太容易在动手前把自己再分析一遍。",
+    name: "事件驱动交易者",
+    subtitle: "你交易的不是蜡烛本身，而是背后的催化剂",
+    camp: "事件派",
+    oneLiner: "你对新闻、政策、财报和主题变化很敏感，机会常常在催化剂里冒出来。",
     description:
-      "你善于总结、表达和梳理，看盘时会自然生成逻辑框架，但实盘往往没有复盘时那么果断。",
+      "你会先问市场为什么要动，而不是只问它动了多少。新的信息、主题和事件变化，本来就是你最自然的观察入口。",
     whyMatch:
-      "你的风险偏好偏低，纪律和逆向中等偏上，说明你更擅长分析环境，而不是在最乱的时候抢反应。",
+      "你的机会敏感和风格弹性偏高，说明你更愿意围绕新催化和变化本身去寻找不对称机会。",
     typicalBehavior:
-      "擅长画图、讲逻辑、拆节奏，常常能把一笔交易说得很明白，但动作不一定和表达一样锋利。",
+      "盯财报、盯政策、盯大新闻和主题轮动；一旦看到催化，你会快速判断它是不是刚刚开始发酵。",
     weakness:
-      "最容易被分析本身困住，越想证明自己有道理，越可能错过最需要简单执行的时刻。",
+      "最怕消息只响一声就没了，或者你把一次性噪音误判成长期催化。",
     hiddenTalent:
-      "你的框架整理能力很强，适合做自己的系统文档和复盘数据库。",
-    bestMarket: "结构清晰、可归纳、能通过复盘不断修正认知的环境。",
-    badMarket: "纯靠反应和胆量、不给时间解释的极端快节奏市场。",
+      "你对市场注意力如何转移有很强体感，只要控制节奏，很容易比别人早一步看到新方向。",
+    bestMarket: "催化密集、主题清晰、预期差能快速兑现的阶段。",
+    badMarket: "新闻很多但持续性很差、一天一个故事的噪音型环境。",
     shareText:
-      "测出来是键盘分析师。思路我有，图我也能画，难的是盘中别再给自己开第二场评审会。",
+      "测出来是事件驱动交易者。我交易的不只是价格，我更在意是什么事情让价格开始移动。",
     scores: {
-      rush: 2,
-      fomo: 4,
-      risk: 2,
-      discipline: 6,
-      patience: 5,
-      contrarian: 5,
-    },
-    closeTypes: ["模拟盘股神", "情绪观察员"],
-    peopleMatches: ["格雷厄姆", "雷·达里奥", "吉姆·查诺斯"],
-  },
-  {
-    name: "空仓哲学家",
-    subtitle: "你对不出手这件事，有自己的高级解释",
-    camp: "防守派",
-    oneLiner: "你不是不想赚钱，你只是觉得很多亏损都可以通过不动来避免。",
-    description:
-      "你把空仓也视作一种主动选择。别人觉得无聊，你会把它理解成等待赔率、等待节奏、等待真正值得的信号。",
-    whyMatch:
-      "你的纪律和耐心都很高，上头和踏空都低，说明你能接受不参与，而不是被迫错过。",
-    typicalBehavior:
-      "市场不清楚就不做，别人忙着找机会时，你更像在筛掉大部分不值得的波动。",
-    weakness:
-      "容易把谨慎一路升级成过度保守，最终错过本来属于你的出手机会。",
-    hiddenTalent:
-      "你对节奏的敬畏感很强，能在混乱阶段保住状态，为真正的机会留下手感和资金。",
-    bestMarket: "震荡无序、亏钱效应扩散、需要大量放弃交易的环境。",
-    badMarket: "强趋势主升、给了信号还一路犹豫的顺风阶段。",
-    shareText:
-      "测出来是空仓哲学家。不是没机会，是大多数机会在我这里还没通过答辩。空着不一定无聊，但确实容易错过烟花。",
-    scores: {
-      rush: 1,
-      fomo: 1,
-      risk: 2,
-      discipline: 9,
-      patience: 9,
+      rush: 7,
+      fomo: 8,
+      risk: 7,
+      discipline: 5,
+      patience: 4,
       contrarian: 7,
     },
-    closeTypes: ["纸上巴菲特", "纪律机器人"],
-    peopleMatches: ["李嘉诚", "格雷厄姆", "吉姆·查诺斯"],
+    closeTypes: ["灵活机会主义者", "激进投机者"],
+    peopleMatches: ["索罗斯", "大卫·泰珀", "约翰·保尔森"],
   },
   {
-    name: "止盈困难户",
-    subtitle: "会买，也会拿，就是卖点常常和自己商量太久",
-    camp: "纠结派",
-    oneLiner: "你不是不会卖，你是每次想卖的时候，脑子里都会冒出再等等看。",
+    name: "日内剥头皮选手",
+    subtitle: "手快、眼快、压力也来得快",
+    camp: "进攻派",
+    oneLiner: "你想要的是动作、精度和即时反馈，太慢的机会会让你失去兴趣。",
     description:
-      "你不一定冲动买，但一旦拿到盈利，就容易开始和市场、和自己讨价还价，想把更大的那段也留下。",
+      "你偏爱短周期博弈，注意力更集中在盘口节奏、短线波动和执行效率上，而不是长逻辑慢兑现。",
     whyMatch:
-      "你的耐心中等偏高，但纪律不够稳，这种组合很容易在盈利管理上拖泥带水。",
+      "你的决策速度、机会敏感和风险承受都偏高，同时持有周期明显偏短，这就是很典型的快节奏交易画像。",
     typicalBehavior:
-      "浮盈时想锁，真卖又怕卖飞；回撤后又会给自己解释成洗盘，来回反复。",
+      "看盘、试单、快进快出；你更在意当下有没有可做的波动，而不是一笔单子能拿几个月。",
     weakness:
-      "最容易把正确变得不完整，本来该漂亮的一笔，最后可能因为不舍而打折。",
+      "频率高的时候，情绪和疲劳会一起抬头，判断很容易在连续博弈里变形。",
     hiddenTalent:
-      "你并不缺持股能力，缺的是把规则放到卖点上。只要补上，收益曲线会顺很多。",
-    bestMarket: "趋势延续、给人持有信心、回撤相对温和的上涨环境。",
-    badMarket: "冲高回落快、分时反复诱导、利润回吐极快的震荡市。",
+      "你对即时反馈非常敏感，只要纪律顶住，短周期执行力会是你的核心优势。",
+    bestMarket: "成交活跃、波动充足、节奏清楚的短线环境。",
+    badMarket: "低波动、无节奏、拉不开空间的沉闷市场。",
     shareText:
-      "测出来是止盈困难户。赚钱的时候我不是不想走，我只是总觉得它也许还能再懂我一点。然后利润先走了。",
+      "测出来是日内剥头皮选手。我要的不是遥远的大逻辑，我要的是现在这一段波动到底做不做。",
     scores: {
-      rush: 5,
-      fomo: 5,
-      risk: 4,
-      discipline: 3,
-      patience: 6,
+      rush: 10,
+      fomo: 8,
+      risk: 7,
+      discipline: 5,
+      patience: 1,
+      contrarian: 4,
+    },
+    closeTypes: ["激进投机者", "事件驱动交易者"],
+    peopleMatches: ["保罗·都铎·琼斯", "索罗斯", "大卫·泰珀"],
+  },
+  {
+    name: "保守配置者",
+    subtitle: "先保护资本，再谈收益弹性",
+    camp: "价值派",
+    oneLiner: "你首先关心的是别亏大钱，而不是别人今天又赚到了多少。",
+    description:
+      "你对本金安全、仓位分散和波动控制非常敏感。对你来说，睡得着觉本身也是交易体验的一部分。",
+    whyMatch:
+      "你的纪律和持有周期偏高，风险承受偏低，说明你并不追求每次都打满，而是更偏向长期稳定。",
+    typicalBehavior:
+      "控制仓位、分散风险、优先考虑防守；在机会不够干净的时候宁可继续等待。",
+    weakness:
+      "太注重安全边际时，容易把所有激进收益都让给别人，结果长期回报偏保守。",
+    hiddenTalent:
+      "你很擅长活下来，而且活得稳。很多人忽略了，长期留在市场里本身就是一种能力。",
+    bestMarket: "可以慢慢积累、回撤可控、收益来自稳定配置的环境。",
+    badMarket: "单边疯涨、风格极端偏激、所有人都在拼杠杆和节奏的市场。",
+    shareText:
+      "测出来是保守配置者。别人先想赚多少，我先想这一段有没有必要把自己暴露在太大的风险里。",
+    scores: {
+      rush: 1,
+      fomo: 2,
+      risk: 2,
+      discipline: 8,
+      patience: 9,
       contrarian: 3,
     },
-    closeTypes: ["格局大师", "天生韭菜"],
-    peopleMatches: ["比尔·阿克曼", "巴菲特", "卡尔·伊坎"],
+    closeTypes: ["基金经理", "价值投资者"],
+    peopleMatches: ["李嘉诚", "格雷厄姆", "张磊"],
   },
   {
-    name: "补仓艺术家",
-    subtitle: "下跌在你眼里，不只是风险，也像一次再谈判",
-    camp: "纠结派",
-    oneLiner: "你不是倔，你是很难承认自己第一次出手的节奏可能错了。",
+    name: "激进投机者",
+    subtitle: "信念大、波动大、后果也大",
+    camp: "进攻派",
+    oneLiner: "只要你觉得赔率站在自己这边，就愿意让一笔交易真正“有感觉”。",
     description:
-      "你对价格的敏感高于对市场情绪的敏感，跌下来时你更容易想到优化成本，而不是先怀疑方向。",
+      "你对大波动并不天然抗拒，甚至会觉得只有足够大的波动，才配得上真正的收益空间。",
     whyMatch:
-      "你的逆向本能和耐心都不低，说明你愿意和市场反着来，但纪律不足时就容易变成和风险硬扛。",
+      "你的风险承受和决策速度都不低，仓位和回撤容忍也更激进，说明你愿意为高收益承担明显代价。",
     typicalBehavior:
-      "跌了先找理由、再找位置、再找加仓依据；只要逻辑没彻底坏，就总想再给它一次机会。",
+      "机会一旦看对，往往不只想象征性参与，而是希望这笔交易足够有分量。",
     weakness:
-      "最容易把纠错做成加码，把承认判断偏差的机会拖成更大的仓位风险。",
+      "判断一旦失误，损失放大的速度也会比别人快。你的上限高，回撤也同样真实。",
     hiddenTalent:
-      "你有在恐慌中保持冷静的能力，若能把补仓变成条件化动作，会很有战斗力。",
-    bestMarket: "急跌后的修复、错杀反弹、波动大但逻辑还在的结构市。",
-    badMarket: "趋势性下跌、基本面塌陷、越补越弱的单边退潮。",
+      "你天生不怕承担结果，这会让你在真正的高赔率机会面前比大多数人更有行动力。",
+    bestMarket: "方向明确、赔率拉开、胜负空间很大的阶段。",
+    badMarket: "噪音太多、胜率不稳、每一步都在赌情绪的混乱环境。",
     shareText:
-      "测出来是补仓艺术家。跌下来我第一反应不是认输，是看看成本还能不能优化。艺术感很强，风险感也得跟上。",
+      "测出来是激进投机者。要做就想做得有感觉，问题是大收益和大回撤往往也一起出现。",
     scores: {
-      rush: 4,
-      fomo: 3,
-      risk: 6,
-      discipline: 3,
-      patience: 7,
-      contrarian: 8,
+      rush: 8,
+      fomo: 7,
+      risk: 10,
+      discipline: 4,
+      patience: 4,
+      contrarian: 6,
     },
-    closeTypes: ["抄底艺术家", "止盈困难户"],
-    peopleMatches: ["冯柳", "约翰·保尔森", "卡尔·伊坎"],
+    closeTypes: ["日内剥头皮选手", "事件驱动交易者"],
+    peopleMatches: ["索罗斯", "卡尔·伊坎", "比尔·阿克曼"],
+  },
+  {
+    name: "天然散户受害者",
+    subtitle: "市场大概已经给你上过几次昂贵的人性课了",
+    camp: "情绪派",
+    oneLiner: "你容易被情绪、热度和短期波动带着走，规则常常在最需要的时候失效。",
+    description:
+      "你不是完全没有判断力，而是实战里太容易被 FOMO、恐惧和即时波动打乱节奏，最后做出和计划不同的动作。",
+    whyMatch:
+      "你的机会敏感很高，但纪律和持有稳定性偏弱，这让你容易在最热和最慌的时候做出最情绪化的选择。",
+    typicalBehavior:
+      "涨了想追、跌了不舍得砍、回头复盘又觉得自己本来不是这么计划的。",
+    weakness:
+      "会在短时间里反复被市场牵着跑，最贵的不是亏钱本身，而是总在重复同一种错。",
+    hiddenTalent:
+      "只要能把情绪延迟半拍，你对市场热度和变化的感知其实并不差。",
+    bestMarket: "简单、强趋势、对错一眼能分清的环境。",
+    badMarket: "情绪拉扯、消息反复、最容易诱发追涨杀跌的市场。",
+    shareText:
+      "测出来是天然散户受害者。不是没想法，是每次一热一慌，手就容易先替脑子做决定。",
+    scores: {
+      rush: 8,
+      fomo: 10,
+      risk: 7,
+      discipline: 2,
+      patience: 3,
+      contrarian: 5,
+    },
+    closeTypes: ["激进投机者", "灵活机会主义者"],
+    peopleMatches: ["比尔·阿克曼", "索罗斯", "大卫·泰珀"],
+  },
+  {
+    name: "灵活机会主义者",
+    subtitle: "你不忠于某一种风格，你只忠于当下有效的东西",
+    camp: "事件派",
+    oneLiner: "你不会把自己绑死在某个标签上，市场怎么变，你就更愿意怎么调。",
+    description:
+      "你不太迷信单一方法。趋势能做趋势，事件能做事件，环境一变，你的第一反应往往不是死扛，而是调整。",
+    whyMatch:
+      "你的风格弹性是最突出的维度之一，同时风险承受和机会敏感也不低，这让你更像一个会随环境切换打法的人。",
+    typicalBehavior:
+      "会根据市场阶段切换持仓周期、交易理由和执行节奏，不太愿意被某种教条困住。",
+    weakness:
+      "灵活的另一面是边界模糊。切换过快时，很容易把“适应”做成“没有稳定锚点”。",
+    hiddenTalent:
+      "你很少被某一种旧叙事困死，这让你在风格切换频繁的市场里更容易保有行动空间。",
+    bestMarket: "风格切换快、机会分散、单一方法容易失效的市场。",
+    badMarket: "单一主线极强、只奖励一种打法的纯风格市场。",
+    shareText:
+      "测出来是灵活机会主义者。我不忠于某一种风格，我只忠于现在什么还有效。",
+    scores: {
+      rush: 6,
+      fomo: 7,
+      risk: 7,
+      discipline: 5,
+      patience: 5,
+      contrarian: 10,
+    },
+    closeTypes: ["事件驱动交易者", "趋势跟随者"],
+    peopleMatches: ["雷·达里奥", "索罗斯", "大卫·泰珀"],
   },
 ];
 
@@ -1009,304 +837,245 @@ const PEOPLE = [
 const QUESTIONS = [
   {
     id: 1,
-    prompt: "看到一只票突然直线拉升，你第一反应更像：",
+    prompt: "当你看到一个高风险、高回报的机会时，你通常的反应是：",
     options: [
-      { text: "先上车再说，强度最重要", weights: { rush: 3, fomo: 3, risk: 2 } },
-      { text: "先看能不能持续，不急这一秒", weights: { discipline: 2, patience: 1, fomo: 1 } },
-      { text: "涨太快了，等回落看看", weights: { patience: 2, contrarian: 2, discipline: 1 } },
-      { text: "热闹通常不是我的买点", weights: { discipline: 2, patience: 2, contrarian: 2 } },
+      { text: "我会兴奋，而且愿意出手试一把", weights: { rush: 2, fomo: 2, risk: 3 } },
+      { text: "我会考虑，但会比较谨慎", weights: { discipline: 2, risk: 1, patience: 1 } },
+      { text: "我更愿意先观望，不急着参与", weights: { discipline: 2, patience: 2 } },
     ],
   },
   {
     id: 2,
-    prompt: "对你来说更难受的是：",
+    prompt: "你通常会把一笔仓位拿多久？",
     options: [
-      { text: "明明看到了却没买", weights: { fomo: 3, rush: 2, risk: 1 } },
-      { text: "买了以后立刻亏钱", weights: { discipline: 2, patience: 1 } },
-      { text: "赚过又吐回去", weights: { fomo: 1, discipline: 1, patience: 1 } },
-      { text: "买得不够有逻辑", weights: { discipline: 3, patience: 1, contrarian: 1 } },
+      { text: "日内进出，甚至当天解决", weights: { rush: 3, fomo: 1 } },
+      { text: "几天到两周左右", weights: { patience: 2, discipline: 1, fomo: 1 } },
+      { text: "几个月以上，甚至更久", weights: { patience: 4, discipline: 2 } },
     ],
   },
   {
     id: 3,
-    prompt: "大家都在聊同一个机会时，你通常会：",
+    prompt: "市场突然加速时，你通常怎么做决定？",
     options: [
-      { text: "更想参与，说明市场认了", weights: { fomo: 3, rush: 2, risk: 1 } },
-      { text: "会做，但只做最核心的那个", weights: { risk: 1, discipline: 2, fomo: 1 } },
-      { text: "开始警惕，太一致了", weights: { contrarian: 2, discipline: 2, patience: 1 } },
-      { text: "我更想找下一个还没被看到的", weights: { contrarian: 3, risk: 1, rush: 1 } },
+      { text: "很快，几乎靠直觉就会动", weights: { rush: 3, risk: 1, fomo: 1 } },
+      { text: "先看一会儿，再决定要不要上", weights: { rush: 1, discipline: 2, fomo: 1 } },
+      { text: "我需要更多时间分析，不能太快", weights: { discipline: 2, patience: 2 } },
     ],
   },
   {
     id: 4,
-    prompt: "一笔交易刚浮盈，你最容易做什么：",
+    prompt: "你会在进场前先设止损吗？",
     options: [
-      { text: "想拿更大空间", weights: { risk: 2, patience: 2, rush: 1 } },
-      { text: "先保护利润再说", weights: { discipline: 3, patience: 1 } },
-      { text: "开始纠结卖不卖", weights: { fomo: 1, discipline: 1, patience: 1 } },
-      { text: "看下一根再决定", weights: { rush: 1, fomo: 1, patience: 1 } },
+      { text: "会，而且我通常会严格执行", weights: { discipline: 4 } },
+      { text: "有时会，看具体情况", weights: { discipline: 2, risk: 1 } },
+      { text: "很少，或者几乎不设", weights: { risk: 2, rush: 1, fomo: 1 } },
     ],
   },
   {
     id: 5,
-    prompt: "连续两笔止损后，你更像：",
+    prompt: "你通常怎么控制仓位大小？",
     options: [
-      { text: "更想立刻做回来", weights: { rush: 3, risk: 2, fomo: 1 } },
-      { text: "暂停一下，收缩动作", weights: { discipline: 2, patience: 2 } },
-      { text: "开始复盘哪里不对", weights: { discipline: 3, patience: 2, contrarian: 1 } },
-      { text: "表面冷静，内心已经在怀疑人生", weights: { fomo: 1, rush: 1, patience: 1 } },
+      { text: "小仓、控制住风险", weights: { discipline: 3, patience: 1 } },
+      { text: "中等仓位，尽量平衡一些", weights: { discipline: 1, risk: 1, patience: 1 } },
+      { text: "我会下重仓，想让这笔交易有分量", weights: { risk: 3, rush: 1 } },
     ],
   },
   {
     id: 6,
-    prompt: "市场没主线、很混沌的时候，你通常：",
+    prompt: "你怎么看待杠杆？",
     options: [
-      { text: "还会找强的试", weights: { rush: 2, fomo: 2, risk: 2 } },
-      { text: "少做甚至不做", weights: { discipline: 2, patience: 3 } },
-      { text: "会盯着看，等情绪变化", weights: { discipline: 1, patience: 2, contrarian: 1 } },
-      { text: "更容易去找超跌反弹", weights: { contrarian: 3, risk: 2, patience: 1 } },
+      { text: "我接受，而且知道怎么控风险", weights: { risk: 2, rush: 1, discipline: 1 } },
+      { text: "偶尔会用，但不会太依赖", weights: { risk: 1 } },
+      { text: "我尽量避免", weights: { discipline: 1, patience: 1 } },
     ],
   },
   {
     id: 7,
-    prompt: "你更相信哪种机会：",
+    prompt: "连续亏几笔以后，你通常是什么状态？",
     options: [
-      { text: "市场已经明显选出来的", weights: { rush: 2, fomo: 2, risk: 1 } },
-      { text: "逻辑最完整的", weights: { discipline: 2, patience: 1, contrarian: 1 } },
-      { text: "位置最舒服、赔率最高的", weights: { patience: 2, contrarian: 2, discipline: 1 } },
-      { text: "别人还没反应过来的新东西", weights: { contrarian: 2, rush: 1, risk: 2 } },
+      { text: "还算冷静，继续按计划来", weights: { discipline: 3, patience: 1 } },
+      { text: "会有点焦虑，但还能尽量理性", weights: { discipline: 1, fomo: 1 } },
+      { text: "容易烦躁，甚至开始情绪化乱动", weights: { rush: 2, fomo: 2, risk: 1 } },
     ],
   },
   {
     id: 8,
-    prompt: "你买入一笔交易后最怕看到：",
+    prompt: "你交易得有多频繁？",
     options: [
-      { text: "直接冲高回落", weights: { fomo: 2, rush: 1 } },
-      { text: "逻辑证伪", weights: { discipline: 3, patience: 1 } },
-      { text: "阴跌不止", weights: { risk: 1, patience: 1, discipline: 1 } },
-      { text: "自己卖飞", weights: { fomo: 3, rush: 1 } },
+      { text: "非常频繁，几乎天天都在做", weights: { rush: 3, fomo: 2, risk: 1 } },
+      { text: "一周做几次", weights: { rush: 1, fomo: 1, risk: 1 } },
+      { text: "偶尔做一下", weights: { patience: 2, discipline: 1 } },
+      { text: "很少，甚至长时间都不动", weights: { patience: 3, discipline: 2 } },
     ],
   },
   {
     id: 9,
-    prompt: "别人恐慌的时候，你更像：",
+    prompt: "你最依赖哪类信息？",
     options: [
-      { text: "我也先撤", weights: { discipline: 1, rush: 1 } },
-      { text: "我开始认真找机会", weights: { contrarian: 2, risk: 2, patience: 1 } },
-      { text: "我先观察有没有情绪拐点", weights: { discipline: 1, patience: 2, contrarian: 2 } },
-      { text: "我通常不会在这种时候乱动", weights: { discipline: 3, patience: 2 } },
+      { text: "基本面，比如财报、宏观数据", weights: { discipline: 2, patience: 2 } },
+      { text: "图表、走势和技术指标", weights: { discipline: 2, rush: 1 } },
+      { text: "新闻、主题和重大事件", weights: { fomo: 2, rush: 1, contrarian: 1 } },
+      { text: "数据模型和系统化分析", weights: { discipline: 3, contrarian: 1 } },
     ],
   },
   {
     id: 10,
-    prompt: "你看盘时更像：",
+    prompt: "哪种策略最像你的风格？",
     options: [
-      { text: "猎手", weights: { rush: 2, risk: 2, fomo: 1 } },
-      { text: "审核员", weights: { discipline: 3, patience: 1 } },
-      { text: "侦察兵", weights: { contrarian: 2, patience: 1, discipline: 1 } },
-      { text: "解说员", weights: { discipline: 1, patience: 1, fomo: 1 } },
+      { text: "价值投资 / 基本面研究", weights: { patience: 3, discipline: 2 } },
+      { text: "趋势跟随", weights: { discipline: 2, rush: 1, risk: 1 } },
+      { text: "事件驱动", weights: { fomo: 2, contrarian: 1, risk: 1 } },
+      { text: "量化 / 算法交易", weights: { discipline: 3, contrarian: 1 } },
     ],
   },
   {
     id: 11,
-    prompt: "如果朋友说“这票都涨成这样了你还敢看？”你更可能想：",
+    prompt: "你会写交易日志、复盘交易吗？",
     options: [
-      { text: "越强越值得看", weights: { rush: 2, fomo: 2, risk: 1 } },
-      { text: "看，但只在确认后", weights: { discipline: 2, patience: 1, fomo: 1 } },
-      { text: "这种时候反而不是我最舒服的位置", weights: { contrarian: 2, patience: 2, discipline: 1 } },
-      { text: "我更关心它涨完后谁会接不住", weights: { contrarian: 3, discipline: 1 } },
+      { text: "会，而且我做得比较持续", weights: { discipline: 3 } },
+      { text: "偶尔会", weights: { discipline: 1 } },
+      { text: "基本没有", weights: { rush: 1, fomo: 1 } },
     ],
   },
   {
     id: 12,
-    prompt: "你做决定最依赖：",
+    prompt: "你的持仓通常有多集中？",
     options: [
-      { text: "强度", weights: { rush: 2, fomo: 2, risk: 1 } },
-      { text: "逻辑", weights: { discipline: 2, patience: 1, contrarian: 1 } },
-      { text: "位置", weights: { patience: 2, contrarian: 2, discipline: 1 } },
-      { text: "情绪", weights: { rush: 1, fomo: 2, contrarian: 1 } },
+      { text: "我更喜欢少数几笔重点仓位", weights: { risk: 2, discipline: 1 } },
+      { text: "中等分散，尽量平衡", weights: { discipline: 1, risk: 1 } },
+      { text: "会分散到很多资产或很多标的", weights: { patience: 1, discipline: 2 } },
     ],
   },
   {
     id: 13,
-    prompt: "你最容易死在哪种情况：",
+    prompt: "你执行计划的纪律性怎么样？",
     options: [
-      { text: "追得太快", weights: { rush: 3, fomo: 2, risk: 1 } },
-      { text: "等得太久", weights: { patience: 3, discipline: 1 } },
-      { text: "想得太多", weights: { discipline: 1, patience: 2, fomo: 1 } },
-      { text: "不肯认错", weights: { risk: 2, contrarian: 2, discipline: 1 } },
+      { text: "我基本能严格按计划执行", weights: { discipline: 4 } },
+      { text: "大多数时候可以", weights: { discipline: 2 } },
+      { text: "我经常做到一半就改主意", weights: { rush: 1, fomo: 1, contrarian: 1 } },
     ],
   },
   {
     id: 14,
-    prompt: "如果一次机会完全走成你预想的样子，你更可能：",
+    prompt: "一笔单子开始赚钱后，你通常怎么处理？",
     options: [
-      { text: "下次更敢", weights: { rush: 2, risk: 2, fomo: 1 } },
-      { text: "归纳成方法", weights: { discipline: 3, patience: 1 } },
-      { text: "觉得这次只是运气和节奏共振", weights: { discipline: 1, patience: 1, contrarian: 1 } },
-      { text: "开始思考还能不能拿更久", weights: { patience: 2, risk: 1, fomo: 1 } },
+      { text: "到预设目标就止盈", weights: { discipline: 3 } },
+      { text: "分批止盈，留一部分继续跑", weights: { discipline: 2, patience: 2 } },
+      { text: "没有固定目标，边走边看", weights: { patience: 2, risk: 1, contrarian: 1 } },
+      { text: "先赚到手，免得利润又消失", weights: { rush: 1, fomo: 2 } },
     ],
   },
   {
     id: 15,
-    prompt: "你在市场里最想证明的是：",
+    prompt: "单笔交易里，你现实中能承受多大的亏损？",
     options: [
-      { text: "我反应够快", weights: { rush: 3, fomo: 1, risk: 1 } },
-      { text: "我判断够准", weights: { discipline: 2, patience: 1, contrarian: 1 } },
-      { text: "我足够稳", weights: { discipline: 3, patience: 2 } },
-      { text: "我能看懂别人没看懂的东西", weights: { contrarian: 3, patience: 1, risk: 1 } },
+      { text: "很小，我不想让单笔错误太伤", weights: { discipline: 2 } },
+      { text: "中等，只要在可控范围内", weights: { risk: 1, discipline: 1 } },
+      { text: "如果我还信逻辑，可以承受比较大回撤", weights: { risk: 3, patience: 1 } },
     ],
   },
   {
     id: 16,
-    prompt: "你觉得自己更像哪种人：",
+    prompt: "哪种描述最像你？",
     options: [
-      { text: "冲锋的人", weights: { rush: 2, risk: 2, fomo: 1 } },
-      { text: "守纪律的人", weights: { discipline: 3, patience: 2 } },
-      { text: "看风向的人", weights: { contrarian: 2, patience: 1, discipline: 1 } },
-      { text: "容易跟自己打架的人", weights: { fomo: 1, rush: 1, patience: 1 } },
+      { text: "我有一套清晰系统，并尽量照它执行", weights: { discipline: 3, patience: 1 } },
+      { text: "我很依赖感觉和经验", weights: { rush: 1, contrarian: 1, risk: 1 } },
+      { text: "市场现在热什么，我就更愿意顺着去做", weights: { fomo: 2, contrarian: 2, rush: 1 } },
     ],
   },
 ];
 
 const QUESTION_COPY_EN = {
   1: {
-    prompt: "When a stock suddenly shoots straight up, your first instinct is:",
-    options: [
-      "Jump in first. Strength matters most.",
-      "Check if it can actually hold. No need to rush this second.",
-      "It moved too fast. I'd wait for a pullback.",
-      "Crowds are usually not my buy point.",
-    ],
+    prompt: "When you see a high-risk, high-reward setup, what is your usual reaction?",
+    options: ["I am excited and willing to go for it", "I will consider it, but carefully", "I would rather stay on the sidelines"],
   },
   2: {
-    prompt: "Which of these hurts you more?",
-    options: [
-      "I saw it but did not buy.",
-      "I bought it and it immediately went red.",
-      "I had profits and then gave them back.",
-      "My entry did not feel logical enough.",
-    ],
+    prompt: "How long do you usually hold a position?",
+    options: ["In and out within the same day", "A few days to a couple of weeks", "Several months or longer"],
   },
   3: {
-    prompt: "When everyone is talking about the same opportunity, you usually:",
-    options: [
-      "Want in even more. The market has already approved it.",
-      "Will trade it, but only the strongest core name.",
-      "Start getting cautious. Too much agreement is dangerous.",
-      "Would rather look for the next thing nobody sees yet.",
-    ],
+    prompt: "When the market moves fast, how do you make decisions?",
+    options: ["Very quickly, almost instinctively", "I watch for a moment, then act", "I need time to think and analyze first"],
   },
   4: {
-    prompt: "A trade just turned green. What do you most easily do next?",
-    options: [
-      "Think about holding for a bigger move.",
-      "Protect the profit first.",
-      "Start debating whether to sell.",
-      "Wait for one more candle before deciding.",
-    ],
+    prompt: "Do you set a stop-loss before entering a trade?",
+    options: ["Always, and I stick to it", "Sometimes, depending on the situation", "Rarely or never"],
   },
   5: {
-    prompt: "After two stop-losses in a row, you are more like:",
-    options: [
-      "I want to win it back immediately.",
-      "Pause and shrink my activity.",
-      "Review what went wrong.",
-      "I look calm outside, but I am doubting life inside.",
-    ],
+    prompt: "How do you usually size your positions?",
+    options: ["Small and controlled", "Medium-sized, balanced", "Heavy size — I want the trade to matter"],
   },
   6: {
-    prompt: "When the market is messy and has no main theme, you usually:",
-    options: [
-      "Still try the strongest names.",
-      "Trade less or not at all.",
-      "Keep watching and wait for sentiment shifts.",
-      "Are more likely to hunt for oversold rebounds.",
-    ],
+    prompt: "What is your attitude toward leverage?",
+    options: ["I am open to it and know how to manage the risk", "I use it occasionally", "I prefer to avoid it"],
   },
   7: {
-    prompt: "Which kind of opportunity do you trust more?",
+    prompt: "After a losing streak, what are you usually like?",
     options: [
-      "The one the market has already clearly chosen.",
-      "The one with the cleanest logic.",
-      "The one with the best entry and best odds.",
-      "The one others have not reacted to yet.",
+      "Calm and disciplined — I stick to the plan",
+      "A bit stressed, but still trying to stay rational",
+      "Frustrated and likely to make emotional trades",
     ],
   },
   8: {
-    prompt: "After you buy, what are you most afraid to see?",
-    options: [
-      "An immediate spike-and-fade.",
-      "The thesis getting disproved.",
-      "A slow bleed that never ends.",
-      "Selling too early and missing the real move.",
-    ],
+    prompt: "How often do you trade?",
+    options: ["Very frequently, sometimes every day", "A few times a week", "Once in a while", "Hardly ever"],
   },
   9: {
-    prompt: "When others panic, you are more like:",
+    prompt: "What type of information do you rely on most?",
     options: [
-      "I pull back too.",
-      "I start looking seriously for opportunities.",
-      "I first watch for a sentiment turning point.",
-      "I usually do not move recklessly at times like that.",
+      "Fundamentals, such as earnings and macro data",
+      "Charts, price action, and technical indicators",
+      "News, themes, and major events",
+      "Data models and systematic analysis",
     ],
   },
   10: {
-    prompt: "When you watch the market, you feel more like a:",
-    options: ["Hunter", "Auditor", "Scout", "Commentator"],
+    prompt: "Which strategy sounds most like your style?",
+    options: [
+      "Value investing / fundamental analysis",
+      "Trend following",
+      "Event-driven trading",
+      "Quantitative / algorithmic trading",
+    ],
   },
   11: {
-    prompt: 'If a friend says, "It has already gone up this much and you still want to watch it?" your thought is:',
-    options: [
-      "The stronger it is, the more it deserves attention.",
-      "Yes, but only after confirmation.",
-      "This is exactly not my most comfortable entry.",
-      "I care more about who gets trapped after the run.",
-    ],
+    prompt: "Do you keep a trading journal and review your trades?",
+    options: ["Yes, consistently", "Sometimes", "Not really"],
   },
   12: {
-    prompt: "When making decisions, what do you rely on most?",
-    options: ["Strength", "Logic", "Entry / price", "Emotion"],
+    prompt: "How concentrated is your portfolio usually?",
+    options: ["I prefer a small number of positions", "I hold a moderate mix", "I spread across many assets or names"],
   },
   13: {
-    prompt: "Where are you most likely to die in the market?",
-    options: [
-      "Chasing too fast.",
-      "Waiting too long.",
-      "Thinking too much.",
-      "Refusing to admit I am wrong.",
-    ],
+    prompt: "How disciplined are you when it comes to following your plan?",
+    options: ["I follow it closely", "Most of the time", "I often change my mind mid-trade"],
   },
   14: {
-    prompt: "If a setup plays out exactly the way you expected, you are more likely to:",
+    prompt: "When a trade is in profit, what do you usually do?",
     options: [
-      "Get bolder next time.",
-      "Turn it into a rule or method.",
-      "Tell myself it was still luck plus timing.",
-      "Wonder whether I could have held even longer.",
+      "Take profit at a pre-planned target",
+      "Scale out gradually and let part of it run",
+      "Hold without a fixed target and decide later",
+      "Take the money quickly before it disappears",
     ],
   },
   15: {
-    prompt: "What do you most want to prove in the market?",
-    options: [
-      "That my reaction speed is fast enough.",
-      "That my judgment is accurate enough.",
-      "That I am stable enough.",
-      "That I can see what others cannot.",
-    ],
+    prompt: "On a single trade, how much loss are you realistically willing to tolerate?",
+    options: ["Very little", "A moderate amount", "A large drawdown if I still believe in it"],
   },
   16: {
-    prompt: "Which kind of person do you feel more like?",
+    prompt: "Which description fits you best?",
     options: [
-      "A person who charges first",
-      "A person who follows rules",
-      "A person who reads the wind",
-      "A person who fights with themselves",
+      "I trade with a clear system and try to follow it",
+      "I rely a lot on feel and experience",
+      "I adapt constantly to whatever is hot in the market",
     ],
   },
 };
 
-const PERSONA_TRANSLATIONS = {
+const LEGACY_PERSONA_TRANSLATIONS = {
   天生韭菜: {
     name: "Natural Bagholder",
     subtitle: "Once the market heats up, your hand speaks before your head",
@@ -1610,6 +1379,199 @@ const PERSONA_TRANSLATIONS = {
     badMarket: "Persistent downtrends and real thesis breakdowns where adding keeps making things worse.",
     shareText:
       "I got Averaging-Down Artist. When price falls, my first thought is not surrender. It is whether I can improve the cost. The artistic instinct is strong. The risk instinct needs to keep up.",
+  },
+};
+
+const PERSONA_TRANSLATIONS = {
+  基金经理: {
+    name: "Fund Manager",
+    subtitle: "Calm, organized, and annoyingly rational",
+    oneLiner: "You care about process, risk control, and consistency more than thrill.",
+    description:
+      "You think about allocation, drawdown and portfolio behavior before you think about excitement. Trading is closer to managing a process than chasing a story.",
+    whyMatch:
+      "Your discipline and holding horizon are both high, while your decision speed is relatively measured. You prefer control over adrenaline.",
+    typicalBehavior:
+      "Research first, size carefully, and avoid letting short-term heat rewrite your entire framework.",
+    weakness:
+      "In fast emotional markets you can look late, because you usually want more confirmation than the crowd needs.",
+    hiddenTalent:
+      "You are good at turning good habits into repeatable performance. That matters more than one flashy trade.",
+    bestMarket: "Structured markets where fundamentals and price action can validate each other over time.",
+    badMarket: "Purely emotional environments that reward reflex before judgment.",
+    shareText:
+      "I got Fund Manager. Calm, organized, and annoyingly rational. The market can be hot. I still want risk under control first.",
+  },
+  价值投资者: {
+    name: "Value Investor",
+    subtitle: "Patient enough to look boring, which is often a strength",
+    oneLiner: "You believe patience pays, especially when the market is too noisy to think clearly.",
+    description:
+      "You would rather understand what something is worth and wait than chase every move that looks exciting in the moment.",
+    whyMatch:
+      "Your holding horizon and discipline are high, and you are not especially driven by immediate opportunity pressure.",
+    typicalBehavior:
+      "Research deeply, wait for a better price, and try not to let daily volatility bully you out of your own thesis.",
+    weakness:
+      "Patience can turn into stubbornness if you underestimate how long the market can stay inefficient.",
+    hiddenTalent:
+      "You can keep independent judgment when everyone else is reacting to noise. That is rare.",
+    bestMarket: "Markets that eventually reward fundamentals, valuation and time.",
+    badMarket: "Markets dominated by short bursts of hype and endless narrative rotation.",
+    shareText:
+      "I got Value Investor. Patient enough to look boring, which is often a strength. I would rather wait for value than sprint after every headline.",
+  },
+  趋势跟随者: {
+    name: "Trend Follower",
+    subtitle: "You would rather ride the move than predict the future",
+    oneLiner: "You do not need to call the bottom. You just want to catch the move once it is real.",
+    description:
+      "You trust price more than storytelling. Once the market proves direction, you are willing to follow rather than over-intellectualize it.",
+    whyMatch:
+      "Your opportunity drive and discipline are both relatively strong, which makes you well suited for following what is already working.",
+    typicalBehavior:
+      "Look for breakouts, confirmation and continuation. Once the market agrees, you want to stay with the move.",
+    weakness:
+      "Choppy markets and fake breakouts can grind you down fast.",
+    hiddenTalent:
+      "You are good at simplifying the problem: what is actually moving, and is it still moving?",
+    bestMarket: "Directional markets with durable trends and clear leadership.",
+    badMarket: "Whipsaw environments where nothing follows through for long.",
+    shareText:
+      "I got Trend Follower. I do not need to predict everything. I just want to catch the move once it actually starts.",
+  },
+  量化交易员: {
+    name: "Quant Trader",
+    subtitle: "In God we trust. Everyone else brings data",
+    oneLiner: "You like logic, data, and repeatable systems more than narrative certainty.",
+    description:
+      "You would rather test a method than debate a storyline. Repeatability matters more to you than sounding right in real time.",
+    whyMatch:
+      "Your discipline is very high and your decision style is more structured than emotional. You want process before opinion.",
+    typicalBehavior:
+      "Track data, review outcomes, and look for approaches that can survive beyond one market regime.",
+    weakness:
+      "When the market turns highly emotional, your system-first instinct can feel slow or rigid.",
+    hiddenTalent:
+      "You can build edge that does not depend on mood, charisma or a hot hand.",
+    bestMarket: "Markets where signals, process and repeated behavior still mean something.",
+    badMarket: "Regime shifts and emotional extremes that distort previously stable patterns.",
+    shareText:
+      "I got Quant Trader. In God we trust. Everyone else brings data. If it cannot repeat, I do not trust it much.",
+  },
+  事件驱动交易者: {
+    name: "Event-Driven Trader",
+    subtitle: "You trade catalysts, not just candles",
+    oneLiner: "Policy shifts, earnings releases, headlines and big news are where opportunity starts to light up for you.",
+    description:
+      "You tend to ask why the market is moving, not just whether it is moving. Catalysts and fresh narratives are your natural hunting ground.",
+    whyMatch:
+      "Your opportunity drive and style flexibility are both high, which points to someone who likes new information and changing setups.",
+    typicalBehavior:
+      "Track earnings, macro, policy and breaking themes, then move when you think the market has not fully priced the shift.",
+    weakness:
+      "It is easy to mistake noise for a true catalyst or confuse a one-day reaction with a durable move.",
+    hiddenTalent:
+      "You are often early to new narratives because you naturally pay attention to what changed.",
+    bestMarket: "Catalyst-rich environments with real repricing and follow-through.",
+    badMarket: "Headline-heavy markets where every new story fades immediately.",
+    shareText:
+      "I got Event-Driven Trader. You trade catalysts, not just candles. If something changed, I want to know whether the market has understood it yet.",
+  },
+  日内剥头皮选手: {
+    name: "Intraday Scalper",
+    subtitle: "Fast hands, fast eyes, fast stress",
+    oneLiner: "You want action, precision and quick feedback. Slow opportunities do not hold your attention well.",
+    description:
+      "You focus on short-term movement, execution and immediate reaction. To you, a lot of the edge lives in timing, not in waiting.",
+    whyMatch:
+      "Your decision speed, opportunity drive and risk tolerance are all elevated, while your holding horizon is short.",
+    typicalBehavior:
+      "Stay close to the screen, react fast, and care more about today's move than a long story six months out.",
+    weakness:
+      "High frequency can magnify fatigue, emotion and overtrading if discipline slips even a little.",
+    hiddenTalent:
+      "You are highly responsive to real-time feedback. In the right environment that is a real advantage.",
+    bestMarket: "Liquid, volatile sessions with clean intraday movement.",
+    badMarket: "Flat, low-energy markets with no real short-term edge.",
+    shareText:
+      "I got Intraday Scalper. Fast hands, fast eyes, fast stress. If the move is here now, I want to do something with it now.",
+  },
+  保守配置者: {
+    name: "Conservative Allocator",
+    subtitle: "You sleep better than most traders",
+    oneLiner: "Protecting capital comes first. Excitement is optional.",
+    description:
+      "You care more about preservation, stability and avoiding damage than about squeezing maximum drama out of every trade.",
+    whyMatch:
+      "Your discipline and holding horizon are high, while your risk tolerance is clearly restrained.",
+    typicalBehavior:
+      "Diversify, control exposure, and think about survivability before upside.",
+    weakness:
+      "You can end up underexposed in the exact moments when good risk is actually worth taking.",
+    hiddenTalent:
+      "You understand that staying in the game matters. Most traders learn that lesson later and more expensively.",
+    bestMarket: "Steady environments where controlled exposure compounds over time.",
+    badMarket: "Frenzied phases where everyone is rewarded for taking oversized risk immediately.",
+    shareText:
+      "I got Conservative Allocator. You sleep better than most traders. I would rather miss some upside than let one idea wreck the whole account.",
+  },
+  激进投机者: {
+    name: "Aggressive Speculator",
+    subtitle: "Big conviction, big swings, big consequences",
+    oneLiner: "When you think you are right, you want the upside to matter.",
+    description:
+      "You are comfortable taking meaningful swings if the setup feels asymmetric. If the trade works, you want it to count.",
+    whyMatch:
+      "Your risk tolerance and decision speed are both high, and you are not naturally built for tiny, cautious positioning.",
+    typicalBehavior:
+      "Commit hard when you believe the setup is there and accept that volatility is part of the price of upside.",
+    weakness:
+      "Your upside is large, but your mistakes can also get large quickly if discipline falls behind conviction.",
+    hiddenTalent:
+      "You do not scare easily when real opportunity appears. That matters in moments most people freeze.",
+    bestMarket: "High-conviction environments with clear asymmetry and meaningful payoff.",
+    badMarket: "Noisy, indecisive markets that punish size and conviction equally.",
+    shareText:
+      "I got Aggressive Speculator. Big conviction, big swings, big consequences. If I am right, I want the result to matter.",
+  },
+  天然散户受害者: {
+    name: "Natural Retail Victim",
+    subtitle: "The market has probably taught you expensive lessons",
+    oneLiner: "You are easily pulled around by emotion, hype, fear of missing out, and short-term noise.",
+    description:
+      "You may understand what you should do, but in real time the market's emotional pull can be stronger than your plan.",
+    whyMatch:
+      "Your opportunity sensitivity is high while your discipline is relatively weak. That often creates expensive emotional timing.",
+    typicalBehavior:
+      "Chase when it feels urgent, hesitate when it feels scary, then review it later wishing you had simply followed your own rules.",
+    weakness:
+      "You may buy tops, hold losers too long, or switch plans mid-trade because the market's mood gets inside your head.",
+    hiddenTalent:
+      "You are not unaware. You are just too close to the heat. One extra beat of discipline would change a lot.",
+    bestMarket: "Simple, directional markets where the right move is obvious and quick to validate.",
+    badMarket: "Emotionally noisy markets that constantly tempt you into impulsive decisions.",
+    shareText:
+      "I got Natural Retail Victim. The market has probably taught me expensive lessons. The pattern is not lack of intelligence. It is getting dragged around by the moment.",
+  },
+  灵活机会主义者: {
+    name: "Flexible Opportunist",
+    subtitle: "You are not loyal to one style, only to what works",
+    oneLiner: "You do not fit neatly into one box, and you are usually okay with that.",
+    description:
+      "You adapt to market conditions rather than forcing the same playbook onto every environment. Style, to you, is a tool, not an identity.",
+    whyMatch:
+      "Your flexibility is high and your risk appetite is not low, which makes you more willing to shift style as the market changes.",
+    typicalBehavior:
+      "You switch between setups, timeframes and tactics depending on what the environment is rewarding now.",
+    weakness:
+      "Adaptability can become inconsistency if you switch too fast and lose a stable decision framework.",
+    hiddenTalent:
+      "You are harder to trap inside one dead style. When markets rotate, that becomes useful quickly.",
+    bestMarket: "Fast-changing markets where one rigid playbook keeps breaking.",
+    badMarket: "Very one-style markets that reward deep specialization over adaptation.",
+    shareText:
+      "I got Flexible Opportunist. I am not loyal to one style, only to what works. If the market changes, I would rather adapt than pretend it did not.",
   },
 };
 
@@ -2012,23 +1974,23 @@ function rankPersonas(scores) {
 
 function rankPeople(scores, mainPersona, options = {}) {
   const excludedNames = options.excludedNames || new Set();
-  const blended = {};
-  DIMENSIONS.forEach(({ key }) => {
-    blended[key] = Number(
-      ((scores[key] * 0.68) + (mainPersona.scores[key] * 0.32)).toFixed(2),
-    );
-  });
+  const lookup = new Map(PEOPLE.map((person) => [person.name, person]));
+  const directMatches = (mainPersona.peopleMatches || [])
+    .filter((name) => !excludedNames.has(name))
+    .map((name) => lookup.get(name))
+    .filter(Boolean);
 
-  return PEOPLE.filter((person) => !excludedNames.has(person.name))
-    .map((person) => {
-    let distance = vectorDistance(blended, person.profileVector);
-    if (mainPersona.peopleMatches.includes(person.name)) {
-      distance -= 0.75;
-    }
-    return { ...person, distance };
-  })
-    .sort((a, b) => a.distance - b.distance)
-    .slice(0, 3);
+  if (directMatches.length >= 3) {
+    return directMatches.slice(0, 3);
+  }
+
+  const fallbacks = PEOPLE.filter(
+    (person) =>
+      !excludedNames.has(person.name) &&
+      !directMatches.some((item) => item.name === person.name),
+  );
+
+  return [...directMatches, ...fallbacks].slice(0, 3);
 }
 
 function buildDimensionInsight(scores, language) {
@@ -2039,58 +2001,58 @@ function buildDimensionInsight(scores, language) {
 
   let insight =
     language === "en"
-      ? "Your core is not simply aggressive or conservative. You are first triggered by a specific kind of market signal."
-      : "你的核心不是简单激进或保守，而是会先被市场里的某种信号触发。";
+      ? "Your trading style is shaped less by what sounds good in theory and more by how you actually respond under pressure."
+      : "你的交易风格，不是由你嘴上认同什么决定的，而是由你在真实波动里会怎么动决定的。";
   let contrast =
     language === "en"
       ? `You are driven more by ${getDimensionLabel(topA, language)} than by ${getDimensionLabel(bottomA, language)}.`
       : `你更像${getDimensionLabel(topA, language)}驱动型，而不是${getDimensionLabel(bottomA, language)}驱动型。`;
 
-  if (scores.rush >= 7 && scores.fomo >= 7) {
+  if (scores.discipline >= 7.5 && scores.patience >= 7) {
     insight =
       language === "en"
-        ? "Your profile leans toward high FOMO plus high impulse speed. You react to opportunity shifts faster than your emotions can fully digest them."
-        : "你的画像偏向“高踏空敏感 + 高上头速度”，你对机会变化的反应通常快过情绪消化。";
+        ? "Your center of gravity is structure. You care about repeatability, process and survival more than the thrill of any single trade."
+        : "你的核心更偏向结构和流程。你在意可复用性、风控和长期存活，而不是单笔交易够不够刺激。";
     contrast =
       language === "en"
-        ? "You behave more like a heat sensor than a slow accumulator."
-        : "你更像热度感应型，而不是慢热囤积型。";
-  } else if (scores.discipline >= 7.5 && scores.patience >= 7) {
+        ? "You behave more like a system builder than a heat chaser."
+        : "你更像系统型交易者，而不是热度追逐型玩家。";
+  } else if (scores.rush >= 7 && scores.risk >= 7) {
     insight =
       language === "en"
-        ? "Your core is not aggression. It is confirmation. You want to decide whether a trade deserves your energy before you allow yourself to get excited."
-        : "你的核心不是激进，而是确认。你会先判断这笔交易值不值得，再决定自己要不要兴奋。";
+        ? "You are wired for speed. When opportunity appears, you would rather act and manage than wait and watch the move leave without you."
+        : "你天然偏快。机会一来，你更愿意先上车、边做边管，而不是站在原地看它自己走掉。";
     contrast =
       language === "en"
-        ? "You are driven more by discipline than by emotion."
-        : "你更像纪律驱动型，而不是情绪驱动型。";
-  } else if (scores.contrarian >= 7 && scores.patience >= 6) {
+        ? "You behave more like an attacker than a capital preserver."
+        : "你更像进攻型选手，而不是纯防守型选手。";
+  } else if (scores.patience >= 7.5 && scores.fomo <= 4) {
     insight =
       language === "en"
-        ? "Your strength is not following consensus. It is your natural suspicion of crowding. You would rather search for comfort where others feel discomfort."
-        : "你的强项不是追随共识，而是对拥挤的本能警惕。你更愿意在别人不舒服时找位置。";
+        ? "Time is one of your real edges. You are more comfortable waiting for logic than reacting to every short-term stimulus."
+        : "时间对你来说是真正的优势之一。你更能等逻辑兑现，而不是被短期噪音拽着走。";
     contrast =
       language === "en"
-        ? "You act more like an expectation-gap hunter than a hype follower."
-        : "你更像预期差猎手，而不是热闹跟随者。";
-  } else if (scores.risk >= 7 && scores.discipline >= 6) {
+        ? "You behave more like a long-horizon player than a short-cycle chaser."
+        : "你更像长周期选手，而不是短频追逐型玩家。";
+  } else if (scores.contrarian >= 7 && scores.fomo >= 6) {
     insight =
       language === "en"
-        ? "You are not blindly reckless. You are an offensive executor with boundaries. If the odds and strength are there, you are willing to carry volatility."
-        : "你不是盲冲型，而是偏进攻的执行派。只要觉得赔率和强度够，你愿意承担波动。";
+        ? "You are not loyal to one style for emotional reasons. You care more about whether the current environment rewards it."
+        : "你不太会为某种风格死忠。你更在意的，是眼下这个市场到底奖励什么。";
     contrast =
       language === "en"
-        ? "You feel more like an attacker with boundaries than a pure conservative."
-        : "你更像带边界的进攻者，而不是纯保守型选手。";
-  } else if (scores.patience >= 7 && scores.fomo <= 4) {
+        ? "You behave more like an adapter than a style purist."
+        : "你更像适应型玩家，而不是风格教条型玩家。";
+  } else if (scores.fomo >= 7 && scores.discipline <= 4) {
     insight =
       language === "en"
-        ? "Your patience is clearly above average. You are not easily thrown off your rhythm just because others made money first."
-        : "你的耐心明显高于大多数人。你不太容易因为别人先赚到而乱掉自己的节奏。";
+        ? "Your biggest variable is not intelligence. It is how strongly the market's emotion can enter your decision process."
+        : "你最大的问题通常不是看不懂，而是市场情绪会不会在关键时刻直接接管你的动作。";
     contrast =
       language === "en"
-        ? "You behave more like a time-based player than a chasing player."
-        : "你更像时间型玩家，而不是追逐型玩家。";
+        ? "You behave more like an emotional participant than a fully rules-based trader."
+        : "你更像情绪参与型选手，而不是完全规则驱动型交易者。";
   }
 
   return {
@@ -2115,26 +2077,8 @@ function buildCloseTypeReason(scores, otherPersona, language) {
       .map((item) => getDimensionLabel(item, language))
       .join(" + ");
     return language === "en"
-      ? `You also carry a bit of ${localizedOther.name}: both of you lean toward ${sharedLabel}, but your expression is a little more restrained.`
-      : `你也有一点${localizedOther.name}的倾向：你们都偏${sharedLabel}，只是你的表现方式更克制一点。`;
-  }
-
-  if (scores.contrarian >= 6.6 && otherPersona.scores.contrarian >= 6.6) {
-    return language === "en"
-      ? `You also carry a bit of ${localizedOther.name}: you dislike entering at peak crowding and prefer waiting for the market to hand back a more comfortable spot.`
-      : `你也有一点${localizedOther.name}的倾向：你不太愿意在最拥挤的时候下手，更喜欢等市场把舒服位置吐出来。`;
-  }
-
-  if (scores.discipline >= 6.6 && otherPersona.scores.discipline >= 6.6) {
-    return language === "en"
-      ? `You also carry a bit of ${localizedOther.name}: you do not act on emotion alone, and often want your plan aligned before you move.`
-      : `你也有一点${localizedOther.name}的倾向：你不是完全靠情绪出手，很多时候还是会想先对齐自己的计划。`;
-  }
-
-  if (scores.fomo >= 6.6 && otherPersona.scores.fomo >= 6.6) {
-    return language === "en"
-      ? `You also carry a bit of ${localizedOther.name}: once the market has stamped something as real, it is hard for you to remain completely still.`
-      : `你也有一点${localizedOther.name}的倾向：机会一旦被市场盖章，你会很难彻底无动于衷。`;
+      ? `You also carry a bit of ${localizedOther.name}: both of you lean toward ${sharedLabel}, but your expression is slightly different in tempo or intensity.`
+      : `你也有一点${localizedOther.name}的倾向：你们都偏向${sharedLabel}，只是你的表达方式在节奏或力度上有些不同。`;
   }
 
   return language === "en"
@@ -2948,8 +2892,8 @@ export default function StockMarketPersonaTest() {
         <div className="pointer-events-none fixed left-[-9999px] top-0 z-[-1] opacity-0" aria-hidden>
           <ShareLongImage
             ref={shareCardRef}
-            title="股市人格测试"
-            titleEn={language === "en" ? "Stock Market Persona Test" : ""}
+            title={language === "en" ? "Trading Personality Quiz" : "交易人格测试"}
+            titleEn=""
             persona={localizedResultPersona}
             camp={localizedResultCamp}
             campLabel={ui.campLabel}
@@ -2970,8 +2914,8 @@ export default function StockMarketPersonaTest() {
             qrUrl={SHARE_TARGET_URL}
             footerCta={
               language === "en"
-                ? "Scan to see what kind of person you are in the stock market"
-                : "扫码测测你进 A 股像什么人"
+                ? "Scan to discover your trading personality"
+                : "扫码测测你真实的交易人格"
             }
             footerDisclaimer={
               language === "en"
