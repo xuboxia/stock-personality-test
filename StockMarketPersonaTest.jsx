@@ -226,7 +226,7 @@ const PERSONAS = [
       contrarian: 3,
     },
     closeTypes: ["追涨冠军", "止盈困难户"],
-    peopleMatches: ["92科比", "作手新一", "小鳄鱼"],
+    peopleMatches: ["保罗·都铎·琼斯", "比尔·阿克曼", "索罗斯"],
   },
   {
     name: "未来游资",
@@ -256,7 +256,7 @@ const PERSONAS = [
       contrarian: 4,
     },
     closeTypes: ["消息冲浪王", "追涨冠军"],
-    peopleMatches: ["赵强（赵老哥）", "方新侠", "保罗·都铎·琼斯"],
+    peopleMatches: ["保罗·都铎·琼斯", "索罗斯", "大卫·泰珀"],
   },
   {
     name: "基金经理",
@@ -316,7 +316,7 @@ const PERSONAS = [
       contrarian: 6,
     },
     closeTypes: ["基金经理", "空仓哲学家"],
-    peopleMatches: ["炒股养家", "冯柳", "李嘉诚"],
+    peopleMatches: ["冯柳", "李嘉诚", "雷·达里奥"],
   },
   {
     name: "追涨冠军",
@@ -346,7 +346,7 @@ const PERSONAS = [
       contrarian: 2,
     },
     closeTypes: ["未来游资", "消息冲浪王"],
-    peopleMatches: ["小鳄鱼", "赵强（赵老哥）", "章建平"],
+    peopleMatches: ["保罗·都铎·琼斯", "大卫·泰珀", "索罗斯"],
   },
   {
     name: "抄底艺术家",
@@ -466,7 +466,7 @@ const PERSONAS = [
       contrarian: 7,
     },
     closeTypes: ["抄底艺术家", "键盘分析师"],
-    peopleMatches: ["炒股养家", "雷·达里奥", "吉姆·查诺斯"],
+    peopleMatches: ["雷·达里奥", "吉姆·查诺斯", "爱德华·索普"],
   },
   {
     name: "纸上巴菲特",
@@ -526,7 +526,7 @@ const PERSONAS = [
       contrarian: 3,
     },
     closeTypes: ["未来游资", "追涨冠军"],
-    peopleMatches: ["方新侠", "作手新一", "大卫·泰珀"],
+    peopleMatches: ["大卫·泰珀", "保罗·都铎·琼斯", "索罗斯"],
   },
   {
     name: "格局大师",
@@ -556,7 +556,7 @@ const PERSONAS = [
       contrarian: 4,
     },
     closeTypes: ["未来游资", "止盈困难户"],
-    peopleMatches: ["章建平", "巴菲特", "比尔·阿克曼"],
+    peopleMatches: ["比尔·阿克曼", "巴菲特", "卡尔·伊坎"],
   },
   {
     name: "键盘分析师",
@@ -646,7 +646,7 @@ const PERSONAS = [
       contrarian: 3,
     },
     closeTypes: ["格局大师", "天生韭菜"],
-    peopleMatches: ["比尔·阿克曼", "章建平", "巴菲特"],
+    peopleMatches: ["比尔·阿克曼", "巴菲特", "卡尔·伊坎"],
   },
   {
     name: "补仓艺术家",
@@ -681,196 +681,6 @@ const PERSONAS = [
 ];
 
 const PEOPLE = [
-  {
-    name: "许翔",
-    shortLabel: "情绪短线代表人物",
-    story:
-      "他以极强的短线攻击性和对涨停板情绪的把握而出名，属于把节奏感和执行力都拉满的类型。",
-    keywords: ["情绪强度", "短线攻击", "节奏极快"],
-    holdingPeriod: "数日到数周",
-    riskLevel: "极高",
-    profileVector: {
-      rush: 10,
-      fomo: 8,
-      risk: 10,
-      discipline: 8,
-      patience: 3,
-      contrarian: 4,
-    },
-    likePoint: "你更像他那种看到机会就敢把动作做实的冲劲。",
-    unlikePoint: "你不像他那种极致强硬的执行密度，也不代表真实能力接近。",
-  },
-  {
-    name: "赵强（赵老哥）",
-    shortLabel: "龙头接力感很强",
-    story:
-      "以围绕龙头和强势股展开交易而被熟知，典型特点是对市场强弱切换和主线辨识度很敏锐。",
-    keywords: ["龙头接力", "强者恒强", "情绪识别"],
-    holdingPeriod: "数日到数周",
-    riskLevel: "高",
-    profileVector: {
-      rush: 9,
-      fomo: 8,
-      risk: 9,
-      discipline: 7,
-      patience: 4,
-      contrarian: 4,
-    },
-    likePoint: "你更像他那种只愿意跟被市场选出来的强者站在一起的劲。",
-    unlikePoint: "你不像他那种成熟的交易体系和实战经验，这里只是行为气质类比。",
-  },
-  {
-    name: "章建平",
-    shortLabel: "大开大合的趋势派气场",
-    story:
-      "市场讨论他时，往往会提到资金体量、趋势段的把握和持有阶段中的承受力。",
-    keywords: ["趋势推进", "持有格局", "进攻性"],
-    holdingPeriod: "数日到数月",
-    riskLevel: "高",
-    profileVector: {
-      rush: 8,
-      fomo: 7,
-      risk: 9,
-      discipline: 6,
-      patience: 5,
-      contrarian: 5,
-    },
-    likePoint: "你更像他身上那种做对方向后愿意把仓位和时间一起押上去的气质。",
-    unlikePoint: "你不像他那种级别的承压能力和完整经验，别把娱乐测试当成业绩对照。",
-  },
-  {
-    name: "方新侠",
-    shortLabel: "热点转换时的快手型",
-    story:
-      "常被拿来代表对热点、题材和市场即时情绪变化有很强体感的一类选手。",
-    keywords: ["热点切换", "快节奏", "题材敏感"],
-    holdingPeriod: "数日到两周",
-    riskLevel: "高",
-    profileVector: {
-      rush: 8,
-      fomo: 7,
-      risk: 8,
-      discipline: 6,
-      patience: 4,
-      contrarian: 4,
-    },
-    likePoint: "你更像他那种对市场注意力流向非常敏感的能力。",
-    unlikePoint: "你不像他可能具备的连续执行经验，这里只在说部分行为倾向。",
-  },
-  {
-    name: "陈小群",
-    shortLabel: "新生代情绪弹性选手",
-    story:
-      "被很多人当作新生代高弹性风格的代表，突出特点是对节奏、热度和市场反馈的快速反应。",
-    keywords: ["弹性", "快速反应", "高情绪贝塔"],
-    holdingPeriod: "数日",
-    riskLevel: "高",
-    profileVector: {
-      rush: 9,
-      fomo: 8,
-      risk: 8,
-      discipline: 5,
-      patience: 3,
-      contrarian: 3,
-    },
-    likePoint: "你更像他那种看到热度时不太想慢半拍的状态。",
-    unlikePoint: "你不像他那种成熟资金博弈经验，别把这理解成真实风格映射。",
-  },
-  {
-    name: "作手新一",
-    shortLabel: "对情绪周期很敏感",
-    story:
-      "常被视为情绪交易语境里的代表人物之一，市场热度变化时动作通常不会太慢。",
-    keywords: ["情绪周期", "快节奏", "热点嗅觉"],
-    holdingPeriod: "数日",
-    riskLevel: "高",
-    profileVector: {
-      rush: 9,
-      fomo: 9,
-      risk: 8,
-      discipline: 5,
-      patience: 3,
-      contrarian: 3,
-    },
-    likePoint: "你更像他那种一旦感到热度拐点就会准备出手的敏感。",
-    unlikePoint: "你不像他那种高频实战的熟练度，这里只是娱乐向彩蛋。",
-  },
-  {
-    name: "小鳄鱼",
-    shortLabel: "强势股偏好明显",
-    story:
-      "常被归类到偏强势股、偏进攻节奏的人群里，典型气质是愿意围绕强者做交易。",
-    keywords: ["强势股", "进攻", "顺势"],
-    holdingPeriod: "数日到两周",
-    riskLevel: "高",
-    profileVector: {
-      rush: 8,
-      fomo: 8,
-      risk: 8,
-      discipline: 6,
-      patience: 4,
-      contrarian: 4,
-    },
-    likePoint: "你更像他身上那种对强势反馈更有信心的状态。",
-    unlikePoint: "你不像他可能拥有的执行强度和资金体量，这不是能力等号。",
-  },
-  {
-    name: "92科比",
-    shortLabel: "热度感应器体质",
-    story:
-      "在情绪和热点风格的讨论里，他常被视为对市场热度极其敏感的一类代表。",
-    keywords: ["热点追踪", "高敏感", "情绪反应快"],
-    holdingPeriod: "数日",
-    riskLevel: "高",
-    profileVector: {
-      rush: 9,
-      fomo: 9,
-      risk: 8,
-      discipline: 4,
-      patience: 3,
-      contrarian: 3,
-    },
-    likePoint: "你更像他那种热度一升温就很难完全无动于衷的体质。",
-    unlikePoint: "你不像他对应的完整风格和历史表现，这里只是局部气质相似。",
-  },
-  {
-    name: "孙国栋",
-    shortLabel: "趋势与纪律兼顾",
-    story:
-      "市场讨论他的风格时，往往会提到对趋势机会的跟随，以及执行层面的相对稳定。",
-    keywords: ["趋势跟随", "执行稳定", "节奏感"],
-    holdingPeriod: "数周到数月",
-    riskLevel: "中高",
-    profileVector: {
-      rush: 7,
-      fomo: 6,
-      risk: 7,
-      discipline: 7,
-      patience: 5,
-      contrarian: 4,
-    },
-    likePoint: "你更像他那种既想做趋势，又不完全放弃纪律的平衡感。",
-    unlikePoint: "你不像他那种成熟的系统和经验积累，这里只做娱乐类比。",
-  },
-  {
-    name: "炒股养家",
-    shortLabel: "情绪与节奏的观察派",
-    story:
-      "很多人提到他时，会先想到对市场情绪、风险控制和交易节奏的理解，而不只是单一手法。",
-    keywords: ["情绪理解", "节奏控制", "风险意识"],
-    holdingPeriod: "数日到数周",
-    riskLevel: "中高",
-    profileVector: {
-      rush: 7,
-      fomo: 5,
-      risk: 7,
-      discipline: 8,
-      patience: 6,
-      contrarian: 5,
-    },
-    likePoint: "你更像他那种先读懂市场情绪，再决定自己要不要参与的感觉。",
-    unlikePoint: "你不像他那种经过长周期验证的交易经验和稳定性。",
-  },
   {
     name: "张磊",
     shortLabel: "成长与长期视角",
@@ -1195,19 +1005,6 @@ const PEOPLE = [
     unlikePoint: "你不像他那种专业级研究和做空能力，这里不是完整风格对应。",
   },
 ];
-
-const ENGLISH_EXCLUDED_PEOPLE = new Set([
-  "许翔",
-  "赵强（赵老哥）",
-  "章建平",
-  "方新侠",
-  "陈小群",
-  "作手新一",
-  "小鳄鱼",
-  "92科比",
-  "孙国栋",
-  "炒股养家",
-]);
 
 const QUESTIONS = [
   {
@@ -1817,116 +1614,6 @@ const PERSONA_TRANSLATIONS = {
 };
 
 const PEOPLE_TRANSLATIONS = {
-  许翔: {
-    name: "Xu Xiang",
-    shortLabel: "A legend of emotional short-term trading",
-    story:
-      "He is often remembered for aggressive short-term execution and an exceptional feel for limit-up sentiment and market intensity.",
-    keywords: ["sentiment", "short-term aggression", "fast rhythm"],
-    holdingPeriod: "Days to weeks",
-    riskLevel: "Very high",
-    likePoint: "You resemble his willingness to make the move real the moment an opportunity appears.",
-    unlikePoint: "You do not resemble his real-world execution density or ability level. This is only a temperament comparison.",
-  },
-  "赵强（赵老哥）": {
-    name: "Zhao Qiang (Zhao Laoge)",
-    shortLabel: "Strong leader-following instinct",
-    story:
-      "He is widely associated with leader continuation trades and strong sensitivity to the market's main line.",
-    keywords: ["leaders", "follow-through", "emotion"],
-    holdingPeriod: "Days to weeks",
-    riskLevel: "High",
-    likePoint: "You resemble the part of him that wants to stand with names the market has already chosen.",
-    unlikePoint: "You do not resemble a fully developed trading system or real track record. This is only a vibe match.",
-  },
-  章建平: {
-    name: "Zhang Jianping",
-    shortLabel: "Large-style trend conviction",
-    story:
-      "People often associate him with size, trend conviction and the ability to sit through meaningful segments.",
-    keywords: ["trend", "conviction", "holding power"],
-    holdingPeriod: "Days to months",
-    riskLevel: "High",
-    likePoint: "You resemble the side that is willing to push time and exposure once the direction feels right.",
-    unlikePoint: "You do not resemble that level of scale, pressure tolerance or complete experience.",
-  },
-  方新侠: {
-    name: "Fang Xinxia",
-    shortLabel: "Fast on hot themes",
-    story:
-      "He is often mentioned as someone with strong feel for theme rotation, hot topics and real-time sentiment changes.",
-    keywords: ["theme rotation", "fast tempo", "hot-money feel"],
-    holdingPeriod: "Days to two weeks",
-    riskLevel: "High",
-    likePoint: "You resemble his sensitivity to where the market's attention is flowing next.",
-    unlikePoint: "You do not resemble the depth of his live execution experience. This is a partial style echo.",
-  },
-  陈小群: {
-    name: "Chen Xiaoqun",
-    shortLabel: "A high-beta new-gen trader",
-    story:
-      "He is often discussed as a representative of high elasticity and fast emotional response in newer market cycles.",
-    keywords: ["elasticity", "fast reaction", "high beta"],
-    holdingPeriod: "Days",
-    riskLevel: "High",
-    likePoint: "You resemble the urge not to be late when heat suddenly expands.",
-    unlikePoint: "You do not resemble his real-world trading maturity or scale.",
-  },
-  作手新一: {
-    name: "Zuoshou Xinyi",
-    shortLabel: "Very sensitive to sentiment cycles",
-    story:
-      "He is often used as an example of someone who reacts quickly when emotional cycles turn.",
-    keywords: ["sentiment cycle", "speed", "theme feel"],
-    holdingPeriod: "Days",
-    riskLevel: "High",
-    likePoint: "You resemble the part that gets ready as soon as a heat inflection appears.",
-    unlikePoint: "You do not resemble the real trading mileage behind that style.",
-  },
-  小鳄鱼: {
-    name: "Little Crocodile",
-    shortLabel: "Prefers strong names",
-    story:
-      "He is commonly grouped with aggressive traders who prefer to operate around clearly strong stocks.",
-    keywords: ["strong stocks", "aggression", "trend follow"],
-    holdingPeriod: "Days to two weeks",
-    riskLevel: "High",
-    likePoint: "You resemble his confidence in strong feedback and already-proven names.",
-    unlikePoint: "You do not resemble his execution intensity or actual capital scale.",
-  },
-  "92科比": {
-    name: "Kobe '92",
-    shortLabel: "Built like a heat sensor",
-    story:
-      "He is often mentioned as someone highly sensitive to market heat and fast topic transitions.",
-    keywords: ["heat sensing", "topic chasing", "fast emotion"],
-    holdingPeriod: "Days",
-    riskLevel: "High",
-    likePoint: "You resemble the part that can hardly stay completely still once the market gets hot.",
-    unlikePoint: "You do not resemble his full live-trading style or actual results.",
-  },
-  孙国栋: {
-    name: "Sun Guodong",
-    shortLabel: "Trend plus discipline",
-    story:
-      "He is often described as someone who combines trend participation with relatively stable execution.",
-    keywords: ["trend", "execution", "rhythm"],
-    holdingPeriod: "Weeks to months",
-    riskLevel: "Medium-high",
-    likePoint: "You resemble the balance between wanting the trend and still respecting structure.",
-    unlikePoint: "You do not resemble the maturity of his real system or experience base.",
-  },
-  炒股养家: {
-    name: "Chaogu Yangjia",
-    shortLabel: "Observer of sentiment and timing",
-    story:
-      "People often bring him up for his understanding of sentiment, timing and risk control rather than one single tactic.",
-    keywords: ["sentiment reading", "timing", "risk control"],
-    holdingPeriod: "Days to weeks",
-    riskLevel: "Medium-high",
-    likePoint: "You resemble the side that wants to understand the market's mood before joining it.",
-    unlikePoint: "You do not resemble a fully tested long-cycle trading record.",
-  },
   张磊: {
     name: "Zhang Lei",
     shortLabel: "Growth and long-term lens",
@@ -2879,11 +2566,7 @@ export default function StockMarketPersonaTest() {
     result && localizedDimensionInsight
       ? buildShareCopy(result.persona, localizedDimensionInsight, language)
       : "";
-  const localizedPeopleMatches = result
-    ? language === "en"
-      ? rankPeople(result.scores, result.persona, { excludedNames: ENGLISH_EXCLUDED_PEOPLE })
-      : result.peopleMatches
-    : [];
+  const localizedPeopleMatches = result ? result.peopleMatches : [];
   const shareCardDimensions = result
     ? DIMENSIONS.map((dimension) => ({
         key: dimension.key,
